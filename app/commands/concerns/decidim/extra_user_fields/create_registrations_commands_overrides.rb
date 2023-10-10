@@ -34,7 +34,11 @@ module Decidim
           date_of_birth: form.date_of_birth,
           gender: form.gender,
           phone_number: form.phone_number,
-          location: form.location
+          location: form.location,
+
+          # Brasil Participativo form
+          document_image: form.document_image,
+          document_number: form.document_form
         )
       end
     end

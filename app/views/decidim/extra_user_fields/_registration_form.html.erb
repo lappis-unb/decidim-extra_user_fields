@@ -42,7 +42,17 @@
       <% end %>
 
       <%# Block ExtraUserFields SignUpFormFields %>
+      <% if current_organization.activated_extra_field?(:document_number) %>
+        <div class="field">
+          <%= f.text_field :document_number %>
+        </div>
+      <% end %>
 
+      <% if current_organization.activated_extra_field?(:document_image) %>
+        <div class="field">
+          <%= f.file_field :document_image, multiple: false, direct_upload: false %>
+        </div>
+      <% end %>
       <%# EndBlock %>
     </div>
   </div>

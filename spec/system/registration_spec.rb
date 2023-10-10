@@ -21,6 +21,9 @@ def fill_extra_user_fields
   fill_in :registration_user_location, with: "Cahors"
   # Block ExtraUserFields FillExtraUserFields
 
+  page.check("registration_user_document_image")
+  page.check("registration_user_document_number")
+
   # EndBlock
 end
 
@@ -46,6 +49,10 @@ describe "Extra user fields", type: :system do
       "country" => country,
       "phone_number" => phone_number,
       "location" => location,
+
+      "document_image" => document_image,
+      "document_number" => document_number,
+
       # EndBlock
     }
   end
@@ -77,6 +84,15 @@ describe "Extra user fields", type: :system do
 
   # Block ExtraUserFields RspecVar
 
+  let(:document_image) do
+    { "enabled" => true }
+  end
+
+
+  let(:document_number) do
+    { "enabled" => true }
+  end
+
   # EndBlock
 
   before do
@@ -93,6 +109,9 @@ describe "Extra user fields", type: :system do
       expect(page).to have_content("Phone Number")
       expect(page).to have_content("Location")
       # Block ExtraUserFields ContainsFieldSpec
+
+      expect(page).to have_content("Document Number")
+      expect(page).to have_content("Document Image (selfie)")
 
       # EndBlock
     end
@@ -117,6 +136,9 @@ describe "Extra user fields", type: :system do
   it_behaves_like "mandatory extra user fields", "location"
   # Block ExtraUserFields ItBehavesLikeSpec
 
+  it_behaves_like "mandatory extra user fields", "document_image"
+  it_behaves_like "mandatory extra user fields", "document_number"
+
   # EndBlock
 
   context "when extra_user_fields is disabled" do
@@ -131,6 +153,8 @@ describe "Extra user fields", type: :system do
       expect(page).not_to have_content("Location")
       # Block ExtraUserFields DoesNotContainFieldSpec
 
+      expect(page).not_to have_content("Document Number")
+      expect(page).not_to have_content("Document Image (selfie)")
       # EndBlock
     end
 

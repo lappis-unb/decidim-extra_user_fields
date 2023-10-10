@@ -50,6 +50,9 @@ module Decidim
             "location" => { "enabled" => form.location.presence || false },
             # Block ExtraUserFields SaveFieldInConfig
 
+            "document_image" => { "enabled" => form.document_image.presence || false },
+            "document_number" => { "enabled" => form.document_number.presence || false },
+
             # EndBlock
           }
         end

@@ -51,6 +51,14 @@ en:
               description: This field is a String field. User will be able to fill
                 in a postal code
               label: Enable postal code field
+            document_number:
+              description: This field is a String field. User will be able to fill a 
+                document number
+              label: Enable document number field
+            document_image:
+              description: This field is a File field. User will be able to submit a
+                photo of an official document.
+              label: Enable document number field
           form:
             callout:
               help: Enable custom extra user fields functionality to be able to manage

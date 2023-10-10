@@ -27,6 +27,9 @@ module Decidim
           self.location = model.extra_user_fields.dig("location", "enabled")
           # Block ExtraUserFields MapModel
 
+          self.document_image = model.extra_user_fields.dig("document_image", "enabled")
+          self.document_number = model.extra_user_fields.dig("document_number", "enabled")
+
           # EndBlock
         end
       end
