@@ -23,6 +23,7 @@ module Decidim
         # Brasil Participativo Attributes
         attribute :document_image, Decidim::Attributes::Blob
         attribute :document_number, String
+        attribute :document_valid, String
 
         # EndBlock
 
@@ -38,6 +39,7 @@ module Decidim
         # Brasil participativo Validations
         validates :document_number, presence: true, if: :document_number?
         validates :document_image, presence: true, if: :document_image?
+        validates :document_valid, presence: true, if: :document_valid?
 
         # EndBlock
       end
@@ -56,6 +58,7 @@ module Decidim
 
         self.document_number = extended_data[:document_number]
         self.document_image = extended_data[:document_image]
+        self.document_valid = extended_data[:document_valid]
 
         # EndBlock
       end
@@ -93,6 +96,10 @@ module Decidim
 
       def document_number?
         extra_user_fields_enabled && current_organization.activated_extra_field?(:document_number)
+      end
+
+      def document_valid?
+        extra_user_fields_enabled && current_organization.activated_extra_field?(:document_valid)
       end
 
       # EndBlock

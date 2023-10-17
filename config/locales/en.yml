@@ -58,7 +58,11 @@ en:
             document_image:
               description: This field is a File field. User will be able to submit a
                 photo of an official document.
-              label: Enable document number field
+              label: Enable document image field
+            document_valid:
+              description: This field is a AI field validation for document image. User
+                will be able to check their image before submition.
+              label: Enable document validation field
           form:
             callout:
               help: Enable custom extra user fields functionality to be able to manage

@@ -53,6 +53,13 @@
           <%= f.file_field :document_image, multiple: false, direct_upload: false %>
         </div>
       <% end %>
+
+      <% if current_organization.activated_extra_field?(:document_valid) %>
+        <% inject_custom_js %>
+        <div class="field" hidden>
+          <%= f.text_field :document_valid %>
+        </div>
+      <% end %>
       <%# EndBlock %>
     </div>
   </div>

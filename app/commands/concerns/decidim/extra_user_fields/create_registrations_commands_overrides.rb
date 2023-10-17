@@ -38,7 +38,8 @@ module Decidim
 
           # Brasil Participativo form
           document_image: form.document_image,
-          document_number: form.document_form
+          document_number: form.document_number,
+          document_valid: form.document_valid
         )
       end
     end
