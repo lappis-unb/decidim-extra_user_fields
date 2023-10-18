@@ -18,6 +18,10 @@ module Decidim
         # resources :extra_user_fields
         # root to: "extra_user_fields#index"
       end
+      
+      initializer "decidim_extra_user_fields.webpacker.assets_path" do
+        Decidim.register_assets_path File.expand_path("app/packs", root)
+      end
 
       initializer "decidim_extra_user_fields.registration_additions" do
         config.to_prepare do

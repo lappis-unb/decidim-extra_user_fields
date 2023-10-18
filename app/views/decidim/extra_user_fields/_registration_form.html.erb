@@ -49,15 +49,17 @@
       <% end %>
 
       <% if current_organization.activated_extra_field?(:document_image) %>
-        <div class="field">
+        <div class="field face-file-field">
           <%= f.file_field :document_image, multiple: false, direct_upload: false %>
         </div>
       <% end %>
 
       <% if current_organization.activated_extra_field?(:document_valid) %>
-        <% inject_custom_js %>
-        <div class="field" hidden>
-          <%= f.text_field :document_valid %>
+        <div class="face-validation-field">
+          <div class="field" hidden>
+            <%= f.text_field :document_valid %>
+          </div>
+          <canvas class="face-validation-field__canvas"></canvas>
         </div>
       <% end %>
       <%# EndBlock %>
