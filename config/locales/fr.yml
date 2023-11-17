@@ -9,6 +9,7 @@ fr:
         location: Localisation
         phone_number: Numéro de téléphone
         postal_code: Code postal
+        document_id: Identifiant du document
   decidim:
     admin:
       actions:
@@ -51,6 +52,11 @@ fr:
               description: Ce champ est un champ code postal. L'utilisateur pourra
                 choisir un code postal.
               label: Activer le champ code postal
+            document_id:
+              description: Ce champ est un champ de identifiant du document. L'utilisateur pourra
+                choisir un code postal.
+              label: Activer le champ identifiant du document
+
           form:
             callout:
               help: Activez la fonctionnalité des champs d'inscription personnalisés

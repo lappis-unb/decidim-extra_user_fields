@@ -21,3 +21,7 @@
 <% if current_organization.activated_extra_field?(:location) %>
   <%= f.text_field :location %>
 <% end %>
+
+<% if current_organization.activated_extra_field?(:document_id)%>
+  <%= f.text_field :document_id %>
+<% end %>

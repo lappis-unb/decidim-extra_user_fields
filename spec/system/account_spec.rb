@@ -23,7 +23,7 @@ describe "Account", type: :system do
       "phone_number" => phone_number,
       "location" => location,
       # Block ExtraUserFields ExtraUserFields
-
+      "document_id" => document_id,
       # EndBlock
     }
   end
@@ -54,7 +54,10 @@ describe "Account", type: :system do
   end
 
   # Block ExtraUserFields RspecVar
-
+  let(:document_id) do
+    { "enabled" => true }
+  end
+  
   # EndBlock
 
   before do
@@ -82,7 +85,7 @@ describe "Account", type: :system do
           fill_in :user_phone_number, with: "0123456789"
           fill_in :user_location, with: "Cahors"
           # Block ExtraUserFields FillFieldSpec
-
+          check :user_document_id
           # EndBlock
 
           find("*[type=submit]").click

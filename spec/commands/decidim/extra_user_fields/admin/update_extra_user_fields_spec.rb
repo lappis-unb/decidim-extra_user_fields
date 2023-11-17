@@ -17,7 +17,7 @@ module Decidim
         let(:phone_number) { true }
         let(:location) { true }
         # Block ExtraUserFields RspecVar
-
+        let(:document_id) { true }
         # EndBlock
 
         # rubocop:disable Style/TrailingCommaInHashLiteral
@@ -31,7 +31,7 @@ module Decidim
             "phone_number" => phone_number,
             "location" => location,
             # Block ExtraUserFields ExtraUserFields
-
+            "document_id" => true,
             # EndBlock
           }
         end
@@ -83,7 +83,7 @@ module Decidim
               expect(extra_user_fields).to include("phone_number" => { "enabled" => true })
               expect(extra_user_fields).to include("location" => { "enabled" => true })
               # Block ExtraUserFields InclusionSpec
-
+              expect(extra_user_fields).to include("document_id" => { "enabled" => true })
               # EndBlock
             end
           end

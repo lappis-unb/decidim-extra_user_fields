@@ -9,6 +9,7 @@ en:
         location: Location
         phone_number: Phone Number
         postal_code: Postal code
+        document_id: Document identifier
   decidim:
     admin:
       actions:
@@ -51,6 +52,10 @@ en:
               description: This field is a String field. User will be able to fill
                 in a postal code
               label: Enable postal code field
+            document_id: 
+              description: This field is a String field. User will be able to fill
+                in a document identifier
+              label: Enable document identifier field
           form:
             callout:
               help: Enable custom extra user fields functionality to be able to manage

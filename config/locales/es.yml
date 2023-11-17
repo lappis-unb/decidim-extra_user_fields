@@ -9,6 +9,7 @@ es:
         location: Localización
         phone_number: Teléfono
         postal_code: Código postal
+        document_id: Ddentificador de documento
   decidim:
     components:
       extra_user_fields:

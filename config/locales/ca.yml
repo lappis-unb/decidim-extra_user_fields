@@ -9,6 +9,7 @@ ca:
         location: Localització
         phone_number: Telèfon
         postal_code: Codi postal
+        document_id: Identificador del document
   decidim:
     components:
       extra_user_fields:
