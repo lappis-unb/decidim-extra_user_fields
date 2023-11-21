@@ -18,6 +18,7 @@ module Decidim
         attribute :document_image, Boolean
         attribute :document_number, Boolean
         attribute :document_valid, Boolean
+        attribute :registration_type, Boolean
 
         # EndBlock
 
@@ -34,6 +35,7 @@ module Decidim
           self.document_image = model.extra_user_fields.dig("document_image", "enabled")
           self.document_number = model.extra_user_fields.dig("document_number", "enabled")
           self.document_valid = model.extra_user_fields.dig("document_valid", "enabled")
+          self.registration_type = model.extra_user_fields.dig("registration_type", "enabled")
 
           # EndBlock
         end

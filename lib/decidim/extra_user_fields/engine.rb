@@ -12,6 +12,7 @@ module Decidim
       isolate_namespace Decidim::ExtraUserFields
 
       DEFAULT_GENDER_OPTIONS = [:male, :female, :other].freeze
+      DEFAULT_REGISTRATION_TYPE_OPTIONS = [:juridica, :estrangeira].freeze
 
       routes do
         # Add engine routes here

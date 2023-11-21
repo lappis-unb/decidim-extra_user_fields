@@ -24,6 +24,7 @@ module Decidim
         attribute :document_image, Decidim::Attributes::Blob
         attribute :document_number, String
         attribute :document_valid, String
+        attribute :registration_type, String
 
         # EndBlock
 
@@ -40,6 +41,7 @@ module Decidim
         validates :document_number, presence: true, if: :document_number?
         validates :document_image, presence: true, if: :document_image?
         validates :document_valid, presence: true, if: :document_valid?
+        validates :registration_type, presence: true, inclusion: { in: Decidim::ExtraUserFields::Engine::DEFAULT_REGISTRATION_TYPE_OPTIONS.map(&:to_s) }, if: :registration_type?
 
         # EndBlock
       end
@@ -59,6 +61,7 @@ module Decidim
         self.document_number = extended_data[:document_number]
         self.document_image = extended_data[:document_image]
         self.document_valid = extended_data[:document_valid]
+        self.registration_type = extended_data[:registration_type]
 
         # EndBlock
       end
@@ -100,6 +103,10 @@ module Decidim
 
       def document_valid?
         extra_user_fields_enabled && current_organization.activated_extra_field?(:document_valid)
+      end
+
+      def registration_type?
+        extra_user_fields_enabled && current_organization.activated_extra_field?(:registration_type)
       end
 
       # EndBlock

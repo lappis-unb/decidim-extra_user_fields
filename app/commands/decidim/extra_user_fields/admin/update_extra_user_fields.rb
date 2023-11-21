@@ -53,6 +53,7 @@ module Decidim
             "document_image" => { "enabled" => form.document_image.presence || false },
             "document_number" => { "enabled" => form.document_number.presence || false },
             "document_valid" => { "enabled" => form.document_valid.presence || false },
+            "registration_type" => { "enabled" => form.registration_type.presence || false },
 
             # EndBlock
           }
