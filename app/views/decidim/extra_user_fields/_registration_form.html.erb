@@ -50,17 +50,34 @@
 
       <% if current_organization.activated_extra_field?(:document_image) %>
         <div class="field face-file-field">
+          <a class="face-validation-field_toggle-help" title="open help">
+            <i class="fa fa-circle-question"></i>
+          </a>
+          <div class="face-validation-field_help" hidden>
+          <a class="face-validation-field_toggle-help" title="close help">
+            <i class="fa fa-xmark"></i>
+          </a>
+            <h6><%= t("decidim.extra_user_fields.registration_form.document_valid.help_title")%></h6>
+            <p><%= t("decidim.extra_user_fields.registration_form.document_valid.help_text")%></p>
+            <img src="<%= asset_pack_path("media/images/selfie_id_help.jpg") %>">
+          </div>
           <%= f.file_field :document_image, multiple: false, direct_upload: false %>
+          <span class="form-error document-form-error" hidden>
+            <%= t("decidim.extra_user_fields.registration_form.document_valid.error_text")%>
+          </span>
         </div>
       <% end %>
 
       <% if current_organization.activated_extra_field?(:document_valid) %>
+        <%= javascript_pack_tag "extra_user_fields" %>
         <div class="face-validation-field">
           <div class="field" hidden>
             <%= f.text_field :document_valid %>
           </div>
-          <canvas class="face-validation-field__canvas" hidden></canvas>
-          <img class="face-validation-field__img" hidden/>
+          <div class="face-validation-field-box">
+            <canvas class="face-validation-field__canvas" hidden></canvas>
+            <img class="face-validation-field__img" hidden/>
+          </div>
         </div>
       <% end %>
       <%# EndBlock %>

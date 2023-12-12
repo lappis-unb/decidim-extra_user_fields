@@ -63,6 +63,7 @@ en:
               description: This field is a AI field validation for document image. User
                 will be able to check their image before submition.
               label: Enable document validation field
+              help_text: Please upload a selfie photo side by side with your document. Your face must be clean, without glasses or masks and looking straight ahead.
           form:
             callout:
               help: Enable custom extra user fields functionality to be able to manage
@@ -87,3 +88,7 @@ en:
       registration_form:
         signup:
           legend: More information
+        document_valid:
+          help_title: Instructions to upload your selfie
+          help_text: Please upload a selfie photo side by side with your document. Your face must be clean, without glasses or masks and looking straight ahead.
+          error_text: The image provided does not match the criteria. See the help instructions to provide a better photo.
