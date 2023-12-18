@@ -24,7 +24,7 @@ def fill_extra_user_fields
   page.check("registration_user_document_image")
   page.check("registration_user_document_number")
   page.check("registration_user_document_valid")
-  page.check("registration_user_registration_type")
+  page.check("registration_user_document_type")
 
   # EndBlock
 end
@@ -55,7 +55,7 @@ describe "Extra user fields", type: :system do
       "document_image" => document_image,
       "document_number" => document_number,
       "document_valid" => document_valid,
-      "registration_type" => registration_type,
+      "document_type" => document_type,
 
       # EndBlock
     }
@@ -100,7 +100,7 @@ describe "Extra user fields", type: :system do
     { "enabled" => true }
   end
 
-  let(:registration_type) do
+  let(:document_type) do
     {"enabled" => true }
   end
 
@@ -152,7 +152,7 @@ describe "Extra user fields", type: :system do
   it_behaves_like "mandatory extra user fields", "document_image"
   it_behaves_like "mandatory extra user fields", "document_number"
   it_behaves_like "mandatory extra user fields", "document_valid"
-  it_behaves_like "mandatory extra user fields", "registration_type"
+  it_behaves_like "mandatory extra user fields", "document_type"
 
   # EndBlock
 

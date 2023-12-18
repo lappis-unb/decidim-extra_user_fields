@@ -21,7 +21,7 @@ module Decidim
         let(:document_image) { true }
         let(:document_number) { true }
         let(:document_valid) { true }
-        let(:registration_type) { true }
+        let(:document_type) { true }
 
         # EndBlock
 
@@ -40,7 +40,7 @@ module Decidim
             "document_image" => document_image,
             "document_number" => document_number,
             "document_valid" => document_valid,
-            "registration_type" => registration_type,
+            "document_type" => document_type,
 
             # EndBlock
           }
@@ -97,7 +97,7 @@ module Decidim
               expect(extra_user_fields).to include("document_image" => { "enabled" => true })
               expect(extra_user_fields).to include("document_number" => { "enabled" => true })
               expect(extra_user_fields).to include("document_valid" => { "enabled" => true })
-              expect(extra_user_fields).to include("registration_type" => { "enabled" => true })
+              expect(extra_user_fields).to include("document_type" => { "enabled" => true })
 
               # EndBlock
             end

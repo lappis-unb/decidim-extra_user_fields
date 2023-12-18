@@ -63,9 +63,9 @@
         </div>
       <% end %>
 
-      <% if current_organization.activated_extra_field?(:registration_type) %>
+      <% if current_organization.activated_extra_field?(:document_type) %>
         <div class="field">
-          <%= f.collection_select :registration_type, f.object.registration_type_options_for_select, :first, :last %>
+          <%= f.collection_select :document_type, f.object.document_type_options_for_select, :first, :last %>
         </div>
       <% end %>
 

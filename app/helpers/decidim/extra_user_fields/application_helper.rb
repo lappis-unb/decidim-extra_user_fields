@@ -11,9 +11,9 @@ module Decidim
         end
       end
 
-      def registration_type_options_for_select
-        Decidim::ExtraUserFields::Engine::DEFAULT_REGISTRATION_TYPE_OPTIONS.map do |registration_type|
-          [registration_type, I18n.t(registration_type, scope: "decidim.extra_user_fields.registration_types")]
+      def document_type_options_for_select
+        Decidim::ExtraUserFields::Engine::DEFAULT_DOCUMENT_TYPE_OPTIONS.map do |document_type|
+          [document_type, I18n.t(document_type, scope: "decidim.extra_user_fields.document_types")]
         end
       end
 

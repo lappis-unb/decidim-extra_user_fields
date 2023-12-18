@@ -63,10 +63,10 @@ en:
               description: This field is a AI field validation for document image. User
                 will be able to check their image before submition.
               label: Enable document validation field
-            registration_type:
+            document_type:
               description: This field is a list of registration types. User will be able to choose
-                between Pessoa Jurídica and Pessoa Estrangeira.
-              label: Enable registration type field
+                between Passport and DNI.
+              label: Enable document type field
           form:
             callout:
               help: Enable custom extra user fields functionality to be able to manage
@@ -84,9 +84,9 @@ en:
           update:
             failure: An error occurred on update
             success: Extra user fields correctly updated in organization
-      registration_types:
-        juridica: Pessoa Jurídica
-        estrangeira: Pessoa Estrangeira
+      document_types:
+        passport: Passaporte
+        dni: DNI
       genders:
         female: Female
         male: Male
