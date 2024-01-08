@@ -11,9 +11,6 @@ module Decidim
       private
 
       def create_user
-        document_image = extended_data[:document_image]
-        file = extended_data[:document_image].tempfile
-        filename = extended_data[:document_image].original_filename
         @user = User.create!(
           email: form.email,
           name: form.name,
@@ -29,35 +26,30 @@ module Decidim
           extended_data: extended_data
           )
           # if document type -> adicionar a verification apenas se existir o campo document_type
-          #controller = Verifications::IdDocuments::AuthorizationsController.new(current_user: @user, using_online?: true)
-          #@authorization = Decidim::Verifications::IdDocuments::AuthorizationsController.new
-          
+         
           @user.extended_data["document_image"].delete("headers")
           @user.extended_data["document_image"].delete("tempfile")
           @user.extended_data["document_image"].delete("original_filename")
 
-          #@image = {"io" => file, "filename" => filename}
-          #@image = {"io" => @user.extended_data["document_image"]["tempfile"], "filename" => @user.extended_data["document_image"]["filename_original"]}
+  
+          @register_form = Decidim::Verifications::IdDocuments::UploadForm.new(user: @user).with_context(current_organization:form.current_organization)
+         
+          @register_form.verification_type = "online"
+          @register_form.document_number = @user.extended_data["document_number"]
+          @register_form.document_type = @user.extended_data["document_type"]
+          @register_form.verification_attachment = form.document_image
           
-          @form = Decidim::Verifications::IdDocuments::UploadForm.new(user: @user).with_context(current_organization:form.current_organization)
-          @form.verification_type = "online"
-          @form.document_number = @user.extended_data["document_number"]
-          @form.document_type = @user.extended_data["document_type"]
-          #@form.verification_attachment["document_type"] = @user.extended_data["document_image"]["document_type"]
-          @form.verification_attachment = @user.extended_data["document_image"]
-          @form.verification_attachment["io"] = file
-          @form.verification_attachment["filename"] = filename
-          
+
+
           @authorization = Decidim::Authorization.find_or_initialize_by(
             user: @user,
             name: "id_documents"
           )
+          
+          @authorization.verification_attachment = @register_form.verification_attachment
+         
 
-          @authorization.verification_attachment = @user.extended_data["document_image"]
-          #@authorization.verification_attachment["io"] = file
-          #@authorization.verification_attachment["filename"] = filename
-
-          Decidim::Verifications::PerformAuthorizationStep.call(@authorization, @form) do
+          Decidim::Verifications::PerformAuthorizationStep.call(@authorization, @register_form) do
             on(:ok) do
               flash[:notice] = t("authorizations.create.success", scope: "decidim.verifications.id_documents")
             end
