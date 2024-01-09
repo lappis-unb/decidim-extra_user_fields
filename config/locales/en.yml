@@ -86,7 +86,7 @@ en:
             success: Extra user fields correctly updated in organization
       document_types:
         passport: Passaporte
-        dni: DNI
+        DNI: DNI
       genders:
         female: Female
         male: Male

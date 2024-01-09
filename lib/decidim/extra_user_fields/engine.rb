@@ -12,7 +12,7 @@ module Decidim
       isolate_namespace Decidim::ExtraUserFields
 
       DEFAULT_GENDER_OPTIONS = [:male, :female, :other].freeze
-      DEFAULT_DOCUMENT_TYPE_OPTIONS = [:passport, :dni].freeze
+      DEFAULT_DOCUMENT_TYPE_OPTIONS = [:passport, :DNI].freeze
 
       routes do
         # Add engine routes here

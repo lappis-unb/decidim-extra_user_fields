@@ -26,7 +26,11 @@ module Decidim
           extended_data: extended_data
         )
 
-        send_verification if form.document_type.present?
+        begin
+          send_verification if form.document_type.present?
+        rescue StandardError => e
+          print e
+        end
 
       end
 
