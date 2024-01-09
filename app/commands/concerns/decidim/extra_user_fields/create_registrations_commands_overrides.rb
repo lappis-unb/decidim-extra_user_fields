@@ -24,42 +24,38 @@ module Decidim
           accepted_tos_version: form.current_organization.tos_version,
           locale: form.current_locale,
           extended_data: extended_data
-          )
-          # if document type -> adicionar a verification apenas se existir o campo document_type
+        )
+
+        send_verification if form.document_type.present?
+
+      end
+
+      def send_verification
+        @register_form = Decidim::Verifications::IdDocuments::UploadForm.new(user: @user).with_context(current_organization:form.current_organization)
          
-          @user.extended_data["document_image"].delete("headers")
-          @user.extended_data["document_image"].delete("tempfile")
-          @user.extended_data["document_image"].delete("original_filename")
+        @register_form.verification_type = "online"
+        @register_form.document_number = form.document_number
+        @register_form.document_type = form.document_type
+        @register_form.verification_attachment = form.document_image
+        
+        @authorization = Decidim::Authorization.find_or_initialize_by(
+          user: @user,
+          name: "id_documents"
+        )
+        
+        @authorization.verification_attachment = @register_form.verification_attachment
+        
 
-  
-          @register_form = Decidim::Verifications::IdDocuments::UploadForm.new(user: @user).with_context(current_organization:form.current_organization)
-         
-          @register_form.verification_type = "online"
-          @register_form.document_number = @user.extended_data["document_number"]
-          @register_form.document_type = @user.extended_data["document_type"]
-          @register_form.verification_attachment = form.document_image
-          
-
-
-          @authorization = Decidim::Authorization.find_or_initialize_by(
-            user: @user,
-            name: "id_documents"
-          )
-          
-          @authorization.verification_attachment = @register_form.verification_attachment
-         
-
-          Decidim::Verifications::PerformAuthorizationStep.call(@authorization, @register_form) do
-            on(:ok) do
-              flash[:notice] = t("authorizations.create.success", scope: "decidim.verifications.id_documents")
-            end
-
-            on(:invalid) do
-              flash.now[:alert] = t("authorizations.create.error", scope: "decidim.verifications.id_documents")
-            end
+        Decidim::Verifications::PerformAuthorizationStep.call(@authorization, @register_form) do
+          on(:ok) do
+            flash[:notice] = t("authorizations.create.success", scope: "decidim.verifications.id_documents")
           end
 
+          on(:invalid) do
+            flash.now[:alert] = t("authorizations.create.error", scope: "decidim.verifications.id_documents")
+          end
         end
+      end 
 
       def extended_data
         @extended_data ||= (@user&.extended_data || {}).merge(
