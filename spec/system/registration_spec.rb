@@ -24,6 +24,7 @@ def fill_extra_user_fields
   page.check("registration_user_document_image")
   page.check("registration_user_document_number")
   page.check("registration_user_document_valid")
+  page.check("registration_user_document_type")
 
   # EndBlock
 end
@@ -54,6 +55,7 @@ describe "Extra user fields", type: :system do
       "document_image" => document_image,
       "document_number" => document_number,
       "document_valid" => document_valid,
+      "document_type" => document_type,
 
       # EndBlock
     }
@@ -98,6 +100,10 @@ describe "Extra user fields", type: :system do
     { "enabled" => true }
   end
 
+  let(:document_type) do
+    {"enabled" => true }
+  end
+
   # EndBlock
 
   before do
@@ -118,6 +124,7 @@ describe "Extra user fields", type: :system do
       expect(page).to have_content("Document Number")
       expect(page).to have_content("Document Image (selfie)")
       expect(page).to have_content("Document Valid")
+      expect(page).to have_content("Registration Type")
 
       # EndBlock
     end
@@ -145,6 +152,7 @@ describe "Extra user fields", type: :system do
   it_behaves_like "mandatory extra user fields", "document_image"
   it_behaves_like "mandatory extra user fields", "document_number"
   it_behaves_like "mandatory extra user fields", "document_valid"
+  it_behaves_like "mandatory extra user fields", "document_type"
 
   # EndBlock
 
@@ -163,6 +171,7 @@ describe "Extra user fields", type: :system do
       expect(page).not_to have_content("Document Number")
       expect(page).not_to have_content("Document Image (selfie)")
       expect(page).not_to have_content("Document Valid")
+      expect(page).not_to have_content("Registration Type")
 
       # EndBlock
     end
