@@ -57,6 +57,10 @@ module Decidim
           Decidim::FormBuilder.class_eval do
             include Decidim::ExtraUserFields::FormBuilderMethods
           end
+
+          Decidim::Verifications::DefaultActionAuthorizer.class_eval do
+            prepend Decidim::ExtraUserFields::GovBrActionAuthorizer
+          end
         end
       end
     end
