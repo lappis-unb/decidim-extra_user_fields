@@ -21,6 +21,10 @@ module Decidim
       def is_non_govbr_user?
         @authorization.user&.extended_data&.fetch("document_type", "").downcase.in?(%w[passport dni]) 
       end
+
+      def component_is_participatory_text?
+        @component.name["en"] == "Participatory Text"
+      end
   
       #
       # Checks the status of the given authorization.
@@ -55,7 +59,7 @@ module Decidim
           [:unauthorized, { fields: unmatched_fields }]
         elsif missing_fields.any?
           [:incomplete, { fields: missing_fields, action: :reauthorize, cancel: true }]
-        elsif is_non_govbr_user?
+        elsif is_non_govbr_user && !component_is_participatory_text??
           #[:unauthorized, { fields: non_gov_user_error_message }]
           [:unauthorized, { fields: unmatched_fields }]
         else
