@@ -25,6 +25,11 @@ module Decidim
       def component_is_participatory_text?
         @component.name["en"] == "Participatory Text"
       end
+
+      def action_is_comment?
+        actions = component&.manifest&.actions
+        actions.include?("comment")
+      end
   
       #
       # Checks the status of the given authorization.
@@ -59,7 +64,7 @@ module Decidim
           [:unauthorized, { fields: unmatched_fields }]
         elsif missing_fields.any?
           [:incomplete, { fields: missing_fields, action: :reauthorize, cancel: true }]
-        elsif is_non_govbr_user && !component_is_participatory_text??
+        elsif is_non_govbr_user? && !component_is_participatory_text? && action_is_comment?
           #[:unauthorized, { fields: non_gov_user_error_message }]
           [:unauthorized, { fields: unmatched_fields }]
         else
