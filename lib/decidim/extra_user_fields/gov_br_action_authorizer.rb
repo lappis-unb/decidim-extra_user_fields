@@ -13,7 +13,7 @@ module Decidim
   module ExtraUserFields
     module GovBrActionAuthorizer
       #
-      # Initializes the DefaultActionAuthorizer class.
+      # Initializes the GovBrActionAuthorizer class.
       #
       # authorization - The existing authorization record to be evaluated. Can be nil.
       # options       - A hash with options related only to the current authorization process.
