@@ -1,5 +1,14 @@
 # frozen_string_literal: true
 
+AUTHORIZED_COMPONENTS=[
+  {
+    "name" => "Proposals",
+    "condition" => "participatory_texts_enabled"
+  }, {
+    "name" => "Survey",
+  }
+]
+
 module Decidim
   module ExtraUserFields
     module GovBrActionAuthorizer
@@ -20,6 +29,20 @@ module Decidim
 
       def is_non_govbr_user?
         @authorization.user&.extended_data&.fetch("document_type", "").downcase.in?(%w[passport dni]) 
+      end
+
+      def component_unauthorized?
+        unauthorized = true
+        for comp in AUTHORIZED_COMPONENTS do
+          if comp["name"] == @component.name["en"]
+            if comp["condition"]
+              unauthorized = !@component.settings[comp["condition"]]
+            else
+              unauthorized = false
+            end
+          end
+        end
+        unauthorized
       end
   
       #
@@ -55,7 +78,7 @@ module Decidim
           [:unauthorized, { fields: unmatched_fields }]
         elsif missing_fields.any?
           [:incomplete, { fields: missing_fields, action: :reauthorize, cancel: true }]
-        elsif is_non_govbr_user?
+        elsif is_non_govbr_user? && component_unauthorized?
           #[:unauthorized, { fields: non_gov_user_error_message }]
           [:unauthorized, { fields: unmatched_fields }]
         else
