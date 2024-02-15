@@ -51,21 +51,15 @@ module Decidim
       def update_permissions
         actions = component&.manifest&.actions
         permissions = actions.inject({}) do |result, action|
-          if !component_is_participatory_text? || action != "comment" 
-            handlers_content = { "id_documents" => {} }
-            serialized = {
-              "authorization_handlers" => handlers_content
-            }
+          handlers_content = { "id_documents" => {} }
+          serialized = {
+            "authorization_handlers" => handlers_content
+          }
 
-            result.update(action => serialized)
-          end
+          result.update(action => serialized)
         end
         component.update!(permissions: permissions)
         permissions
-      end
-
-      def component_is_participatory_text?
-        component.name["en"] == "Participatory Text"
       end
     end
   end
