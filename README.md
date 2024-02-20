@@ -44,7 +44,7 @@ PATH
 
 É necessário habilitar a opção **Enable extra user fields** no painel de administração para usar os novos campos no formulário de registro. Para isso acesse a opção **Configurações** e em seguida escolha a opção **Manage extra user fields**.
 
-![manage_extra_user_fields](imagens/manage_extra_user_fields.png)
+![manage_extra_user_fields](images/manage_extra_user_fields.png)
 
 Logo após é possível habilitar os campos extras que irão compor o formulário de registro. As opções de campos extras são:
 
@@ -70,7 +70,7 @@ Para habilitar a autorização via documentos de identidade, siga os passos abai
 3. Marque a opção **Online (Conectado)** para o método de verificação.
 4. Com esse método, os participantes farão o upload dos documentos, e os administradores revisarão os mesmos.
 
-![identity_docs](imagens/identity_docs.png)
+![identity_docs](images/identity_docs.png)
 
 Para mais detalhes, consulte a [documentação oficial](https://docs.decidim.org/en/develop/admin/participants/authorizations/identity_documents.html).
  
@@ -191,7 +191,7 @@ Segue-se uma explicação de como criar um componente do tipo Texto Participativ
 2. Na criação da nova proposta, marcar a opção **Textos participativos habilitados**.
 3. Restrições de uso podem ser configuradas na hora de criar uma proposta. Como, por exemplo, se o usuário pode votar na proposta e se ele pode comentar. Conforme a imagem a seguir:
 
-[enable components](imagens/config_components.png)
+[enable components](images/config_components.png)
 ![Screenshot from 2024-02-20 16-01-34.png](Documentac%CC%A7a%CC%83o%20Brasil%20Participativo%2090c46513907d42d1b6da8a1ec0b3f6e4/Screenshot_from_2024-02-20_16-01-34.png)
 
 4. Depois de criado, acesse esse novo componente e clique no botão Textos Participativos. Em seguida importe o documento, em formato **Markdown**, **ODT**, contendo todos os textos. Depois disso as propostas estão prontas para serem publicadas.
