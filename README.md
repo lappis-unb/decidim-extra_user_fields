@@ -191,8 +191,7 @@ Segue-se uma explicação de como criar um componente do tipo Texto Participativ
 2. Na criação da nova proposta, marcar a opção **Textos participativos habilitados**.
 3. Restrições de uso podem ser configuradas na hora de criar uma proposta. Como, por exemplo, se o usuário pode votar na proposta e se ele pode comentar. Conforme a imagem a seguir:
 
-[enable components](images/config_components.png)
-![Screenshot from 2024-02-20 16-01-34.png](Documentac%CC%A7a%CC%83o%20Brasil%20Participativo%2090c46513907d42d1b6da8a1ec0b3f6e4/Screenshot_from_2024-02-20_16-01-34.png)
+![enable components](images/config_components.png)
 
 4. Depois de criado, acesse esse novo componente e clique no botão Textos Participativos. Em seguida importe o documento, em formato **Markdown**, **ODT**, contendo todos os textos. Depois disso as propostas estão prontas para serem publicadas.
 
