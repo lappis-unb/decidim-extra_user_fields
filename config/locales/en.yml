@@ -51,6 +51,23 @@ en:
               description: This field is a String field. User will be able to fill
                 in a postal code
               label: Enable postal code field
+            document_number:
+              description: This field is a String field. User will be able to fill a 
+                document number
+              label: Enable document number field
+            document_image:
+              description: This field is a File field. User will be able to submit a
+                photo of an official document.
+              label: Enable document image field
+            document_valid:
+              description: This field is a AI field validation for document image. User
+                will be able to check their image before submition.
+              label: Enable document validation field
+              help_text: Please upload a selfie photo side by side with your document. Your face must be clean, without glasses or masks and looking straight ahead.
+            document_type:
+              description: This field is a list of registration types. User will be able to choose
+                between Passport and DNI.
+              label: Enable document type field
           form:
             callout:
               help: Enable custom extra user fields functionality to be able to manage
@@ -68,6 +85,9 @@ en:
           update:
             failure: An error occurred on update
             success: Extra user fields correctly updated in organization
+      document_types:
+        passport: Passaporte
+        DNI: DNI
       genders:
         female: Female
         male: Male
@@ -75,3 +95,7 @@ en:
       registration_form:
         signup:
           legend: More information
+        document_valid:
+          help_title: Instructions to upload your selfie
+          help_text: Please upload a selfie photo side by side with your document. Your face must be clean, without glasses or masks and looking straight ahead.
+          error_text: The image provided does not match the criteria. See the help instructions to provide a better photo.

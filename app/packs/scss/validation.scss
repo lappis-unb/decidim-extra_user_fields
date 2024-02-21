@@ -1,0 +1,22 @@
+.face-file-field {
+  position: relative;
+
+  h6 {
+    margin-top: 3px;
+  }
+
+  .face-validation-field_help {
+    z-index: 1;
+    padding: 10px;
+    box-shadow: rgba(0,0,0,0.5) 1px 1px 4px;
+    border-radius: 4px;
+    background: #fff;
+    position: relative;
+  }
+
+  .face-validation-field_toggle-help {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+  }
+}

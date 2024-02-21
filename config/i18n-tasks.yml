@@ -8,6 +8,7 @@ ignore_unused:
   - activemodel.attributes.user.*
   - decidim.admin.extra_user_fields.menu.title
   - decidim.extra_user_fields.genders.*
+  - decidim.extra_user_fields.document_types.*
 
 ignore_missing:
   - decidim.participatory_processes.scopes.global

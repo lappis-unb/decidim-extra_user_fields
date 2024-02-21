@@ -12,11 +12,16 @@ module Decidim
       isolate_namespace Decidim::ExtraUserFields
 
       DEFAULT_GENDER_OPTIONS = [:male, :female, :other].freeze
+      DEFAULT_DOCUMENT_TYPE_OPTIONS = [:passport, :DNI].freeze
 
       routes do
         # Add engine routes here
         # resources :extra_user_fields
         # root to: "extra_user_fields#index"
+      end
+      
+      initializer "decidim_extra_user_fields.webpacker.assets_path" do
+        Decidim.register_assets_path File.expand_path("app/packs", root)
       end
 
       initializer "decidim_extra_user_fields.registration_additions" do
@@ -51,6 +56,10 @@ module Decidim
 
           Decidim::FormBuilder.class_eval do
             include Decidim::ExtraUserFields::FormBuilderMethods
+          end
+
+          Decidim::Verifications::DefaultActionAuthorizer.class_eval do
+            prepend Decidim::ExtraUserFields::GovBrActionAuthorizer
           end
         end
       end

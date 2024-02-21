@@ -20,6 +20,12 @@ module Decidim
         attribute :phone_number, String
         attribute :location, String
 
+        # Brasil Participativo Attributes
+        attribute :document_image, Decidim::Attributes::Blob
+        attribute :document_number, String
+        attribute :document_valid, String
+        attribute :document_type, String
+
         # EndBlock
 
         # Block ExtraUserFields Validations
@@ -30,6 +36,12 @@ module Decidim
         validates :gender, presence: true, inclusion: { in: Decidim::ExtraUserFields::Engine::DEFAULT_GENDER_OPTIONS.map(&:to_s) }, if: :gender?
         validates :phone_number, presence: true, if: :phone_number?
         validates :location, presence: true, if: :location?
+
+        # Brasil participativo Validations
+        validates :document_number, presence: true, if: :document_number?
+        validates :document_image, presence: true, if: :document_image?
+        validates :document_valid, presence: true, if: :document_valid?
+        validates :document_type, presence: true, inclusion: { in: Decidim::ExtraUserFields::Engine::DEFAULT_DOCUMENT_TYPE_OPTIONS.map(&:to_s) }, if: :document_type?
 
         # EndBlock
       end
@@ -45,6 +57,11 @@ module Decidim
         self.location = extended_data[:location]
 
         # Block ExtraUserFields MapModel
+
+        self.document_number = extended_data[:document_number]
+        self.document_image = extended_data[:document_image]
+        self.document_valid = extended_data[:document_valid]
+        self.document_type = extended_data[:document_type]
 
         # EndBlock
       end
@@ -74,6 +91,22 @@ module Decidim
 
       def location?
         extra_user_fields_enabled && current_organization.activated_extra_field?(:location)
+      end
+
+      def document_image?
+        extra_user_fields_enabled && current_organization.activated_extra_field?(:document_image)
+      end
+
+      def document_number?
+        extra_user_fields_enabled && current_organization.activated_extra_field?(:document_number)
+      end
+
+      def document_valid?
+        extra_user_fields_enabled && current_organization.activated_extra_field?(:document_valid)
+      end
+
+      def document_type?
+        extra_user_fields_enabled && current_organization.activated_extra_field?(:document_type)
       end
 
       # EndBlock
