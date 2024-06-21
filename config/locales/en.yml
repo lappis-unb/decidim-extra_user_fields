@@ -10,6 +10,13 @@ en:
         phone_number: Phone Number
         postal_code: Postal code
   decidim:
+    authorization_modals:
+      content:
+        forbidden:
+          explanation:
+            Apenas usuários com conta vínculada ao gov.br podem realizar esta ação. Only users with account linked with gov.br can perform this action.
+          ok:
+            Ok
     admin:
       actions:
         export: Export
@@ -52,7 +59,7 @@ en:
                 in a postal code
               label: Enable postal code field
             document_number:
-              description: This field is a String field. User will be able to fill a 
+              description: This field is a String field. User will be able to fill a
                 document number
               label: Enable document number field
             document_image:

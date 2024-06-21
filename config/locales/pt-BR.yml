@@ -1,0 +1,87 @@
+pt-BR:
+  activemodel:
+    attributes:
+      user:
+        country: País
+        date_of_birth: Data de nascimento
+        gender: Gênero Biológico
+        location: Endereço
+        phone_number: Número de telefone
+        postal_code: CEP
+  decidim:
+    authorization_modals:
+      content:
+        forbidden:
+          explanation:
+            Apenas usuários com conta vínculada ao gov.br podem realizar esta ação. Only users with account linked with gov.br can perform this action.
+          ok:
+            Ok
+    admin:
+      actions:
+        export: Exportar
+      exports:
+        export_as: Exportar %{export_format}
+      extra_user_fields:
+        menu:
+          title: Registro de Usuários Estrangeiros
+    components:
+      extra_user_fields:
+        name: ExtraUserFields
+    extra_user_fields:
+      admin:
+        exports:
+          users: Usuários
+        extra_user_fields:
+          fields:
+            country:
+              description: Este campo é uma lista de países. O usuário será capaz de escolher seu país de origem.
+              label: Habilitar campo "País"
+            date_of_birth:
+              description: Este campo é um campo de Data. O usuário será capaz de registrar a sua data de nascimento utilizando um DatePicker.
+              label: Habilitar campo "Data de nascimento"
+            gender:
+              description: Este campo é uma lista de gêneros. O usuário será capaz de escolher seu gênero biológico.
+              label: Habilitar campo "Gênero Biológico"
+            location:
+              description: Este campo é um campo de texto. O usuário será capaz de preencher o seu endereço.
+              label: Habilitar campo "Endereço"
+            phone_number:
+              description: Este campo é um campo de texto. O usuário será capaz de preencher o seu número de telefone.
+              label: Habilitar campo "Número de telefone"
+            postal_code:
+              description: Este campo é um campo de texto. O usuário será capaz de preencher o seu CEP.
+              label: Habilitar campo "CEP"
+            document_number:
+              description: Este campo é um campo de texto. O usuário será capaz de preencher o número de seu documento escolhido.
+              label: Habilitar campo "Número do documento"
+            document_image:
+              description: Este campo é um campo de upload de arquivos. O usuário será capaz de submeter a foto do seu documento escolhido.
+              label: Habilitar campo "Foto do documento"
+            document_valid:
+              description: Este campo é um campo de validação de documento feita por IA. O usuário será capaz de receber feedback instântaneo sobre a foto do documento enviada.
+              label: Habilitar validação de documento por IA.
+              help_text: Por favor, envie uma foto sua com o documento escolhido ao lado do rosto. A foto deve estar nítida e você deve olhar em direção à câmera. Não utilize óculos, máscaras ou chapéus ao tirar a foto.
+            document_type:
+              description: Este campo é uma lista de tipos de documento. O usuário será capaz de escolher qual tipo de documento será utilizado na validação (Passaporte ou DNI).
+              label: Habilitar campo "Tipo de documento"
+          form:
+            callout:
+              help: Habilite a funcionalidade de registro de pessoas estrangeiras para ser capaz de gerênciar a coleta de informações extras de usuário e realizar a autorização de pessoas estrangeiras na plataforma.
+            extra_user_fields:
+              extra_user_fields_enabled: Habilitar Registro de Usuários Estrangeiros
+              section: Campos disponíveis para coleta de informações extras no momento do registro do usuário.
+            global:
+              title: Ativar / Desativar funcionalidade
+          index:
+            save: Salvar
+            title: Registro de Usuários Estrangeiros
+          update:
+            failure: Ocorreu um erro durante a atualização.
+            success: Configurações de Registro de Usuários Estrangeiros atualizadas com sucesso.
+      document_types:
+        passport: Passaporte
+        DNI: DNI
+      genders:
+        female: Mulher
+        male: Homem
+        other: Outro
