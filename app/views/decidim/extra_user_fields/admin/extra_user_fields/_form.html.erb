@@ -28,7 +28,30 @@
     <%= render partial: "decidim/extra_user_fields/admin/extra_user_fields/fields/document_image", locals: { form: form } %>
     <%= render partial: "decidim/extra_user_fields/admin/extra_user_fields/fields/document_valid", locals: { form: form } %>
     <%= render partial: "decidim/extra_user_fields/admin/extra_user_fields/fields/document_type", locals: { form: form } %>
-
     <%# EndBlock %>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-section">
+    <div>
+      <h3>Componentes Permitidos</h3>
+    </div>
+
+    <div class="row column">
+      <%= form.check_box :proposals_permitted, label: "Permitir Propostas" %>
+    </div>
+
+    <div class="row column">
+      <%= form.check_box :participatory_texts_permitted, label: "Permitir Textos Participativos" %>
+    </div>
+
+    <div class="row column">
+      <%= form.check_box :surveys_permitted, label: "Permitir Questionários" %>
+    </div>
+
+    <div class="row column">
+      <%= form.check_box :meetings_permitted, label: "Pemitir Reuniões" %>
+    </div>
   </div>
 </div>

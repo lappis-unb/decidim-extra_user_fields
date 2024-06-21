@@ -22,6 +22,12 @@ module Decidim
       def activated_extra_field?(sym)
         extra_user_fields.dig(sym.to_s, "enabled") == true
       end
+
+      %w(proposals participatory_texts surveys meetings).each do |component|
+        define_method "#{component}_permitted_for_foreign_users?" do
+          self.extra_user_fields["permitted_components"].try(:[], component) || false
+        end
+      end
     end
   end
 end

@@ -56,6 +56,12 @@ module Decidim
             "document_type" => { "enabled" => form.document_type.presence || false },
 
             # EndBlock
+            "permitted_components" => {
+              "proposals" => form.proposals_permitted?,
+              "participatory_texts" => form.participatory_texts_permitted?,
+              "surveys" => form.surveys_permitted?,
+              "meetings" => form.meetings_permitted?
+            }
           }
         end
         # rubocop:enable Style/TrailingCommaInHashLiteral

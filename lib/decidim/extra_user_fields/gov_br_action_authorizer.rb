@@ -25,26 +25,30 @@ module Decidim
         @options = options.deep_dup || {} # options hash is cloned to allow changes applied to it without risks
         @component = resource.try(:component) || component
         @resource = resource
+        @organization = component.organization
       end
 
-      def is_non_govbr_user?
-        @authorization.user&.extended_data&.fetch("document_type", "").downcase.in?(%w[passport dni]) 
+      def non_govbr_user?
+        @authorization.user&.extended_data&.fetch("document_type", "").downcase.in?(%w[passport dni])
       end
 
-      def component_unauthorized?
-        unauthorized = true
-        for comp in AUTHORIZED_COMPONENTS do
-          if comp["name"] == @component.name["en"]
-            if comp["condition"]
-              unauthorized = !@component.settings[comp["condition"]]
-            else
-              unauthorized = false
-            end
+      def component_permitted_for_foreign_user?
+        case @component.manifest_name
+        when "proposals"
+          if @component.settings["participatory_texts_enabled"]
+            organization.participatory_texts_permitted_for_foreign_users?
+          else
+            organization.proposals_permitted_for_foreign_users?
           end
+        when "surveys"
+          organization.surveys_permitted_for_foreign_users?
+        when "meetings"
+          organization.meetings_permitted_for_foreign_users?
+        else
+          false
         end
-        unauthorized
       end
-  
+
       #
       # Checks the status of the given authorization.
       #
@@ -78,14 +82,14 @@ module Decidim
           [:unauthorized, { fields: unmatched_fields }]
         elsif missing_fields.any?
           [:incomplete, { fields: missing_fields, action: :reauthorize, cancel: true }]
-        elsif is_non_govbr_user? && component_unauthorized?
+        elsif non_govbr_user? && !component_permitted_for_foreign_user?
           #[:unauthorized, { fields: non_gov_user_error_message }]
-          [:unauthorized, { fields: unmatched_fields }]
+          [:forbidden, {}]
         else
           [:ok, {}]
         end
       end
-  
+
       #
       # Allow to add params to redirect URLs, to modify forms behaviour based on the authorization process options.
       #
@@ -94,16 +98,16 @@ module Decidim
       def redirect_params
         {}
       end
-  
+
       protected
-  
-      attr_reader :authorization, :options, :component, :resource
+
+      attr_reader :authorization, :options, :component, :resource, :organization
 
       def non_gov_user_error_message
         # error_message = { error: "This action is not permitted for non-govbr users." }
         # error_message
       end
-  
+
       def unmatched_fields
         @unmatched_fields ||= (valued_options_keys & authorization.metadata.to_h.keys).each_with_object({}) do |field, unmatched|
           required_value = options[field].respond_to?(:value) ? options[field].value : options[field]
@@ -111,26 +115,26 @@ module Decidim
           unmatched
         end
       end
-  
+
       def missing_fields
         @missing_fields ||= valid_options_keys.each_with_object([]) do |field, missing|
           missing << field if authorization.metadata[field].blank?
           missing
         end
       end
-  
+
       def valid_options_keys
         @valid_options_keys ||= options.map do |key, value|
           key if value.present? || value.try(:required_for_authorization?)
         end.compact
       end
-  
+
       def valued_options_keys
         @valued_options_keys ||= options.map do |key, value|
           key if value.respond_to?(:value) ? value.value.present? : value.present?
         end.compact
       end
-  
+
       def authorization_expired?
         authorization.expires_at.present? && authorization.expired?
       end

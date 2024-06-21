@@ -73,7 +73,7 @@ Para habilitar a autorização via documentos de identidade, siga os passos abai
 ![identity_docs](images/identity_docs.png)
 
 Para mais detalhes, consulte a [documentação oficial](https://docs.decidim.org/en/develop/admin/participants/authorizations/identity_documents.html).
- 
+
 
 ## Autenticação de usuários estrangeiros
 
@@ -90,19 +90,19 @@ Para isso, foi necessário implementar um método send_verification para criar u
 # app/commands/concerns/decidim/extra_user_fields/create_registrations_commands_overrides.rb
 def send_verification
   @register_form = Decidim::Verifications::IdDocuments::UploadForm.new(user: @user).with_context(current_organization:form.current_organization)
-         
+
   @register_form.verification_type = "online"
   @register_form.document_number = form.document_number
   @register_form.document_type = form.document_type
   @register_form.verification_attachment = form.document_image
-        
+
   @authorization = Decidim::Authorization.    find_or_initialize_by(
     user: @user,
     name: "id_documents"
   )
-        
+
   @authorization.verification_attachment = @register_form.verification_attachment
-        
+
 
   Decidim::Verifications::PerformAuthorizationStep.call(@authorization, @register_form) do
     on(:ok) do
@@ -121,7 +121,7 @@ Assista ao [vídeo exemplificando o fluxo de autenticação e verificação do u
 
 ## Validação de usuários cadastrados via Gov.br
 
-Quando habilitamos a opção **Identity Documents** nas autorizações, o comportamento padrão é solicitar o número e a foto do documento de todos os usuários. No entanto, o comportamento desejado é que os usuários logados via gov.br não precisem fornecer esses dados de 
+Quando habilitamos a opção **Identity Documents** nas autorizações, o comportamento padrão é solicitar o número e a foto do documento de todos os usuários. No entanto, o comportamento desejado é que os usuários logados via gov.br não precisem fornecer esses dados de
 documento, uma vez que essa informação é necessária apenas para usuários estrangeiros.
 
 Para resolver esse problema, implementamos o método **grant_authorization**, que autoriza o usuário logado com o **gov.br**, validando-o sem a necessidade de apresentar um documento oficial.
@@ -131,12 +131,12 @@ Aqui está o trecho de código que deve ser chamado logo após a criação do us
 ```ruby
 # app/commands/decidim/create_omniauth_registration.rb
 def grant_authorization
-  # If the Authorization option is enabled in the admin panel, all users will be required to upload 
-  # an identification document. However, this verification is not intended for users who registered 
+  # If the Authorization option is enabled in the admin panel, all users will be required to upload
+  # an identification document. However, this verification is not intended for users who registered
   # through govbr. In this method, authorization is granted to users registered with govbr.
 
   @authorization = Decidim::Authorization.find_or_initialize_by(user: @user, name: "id_documents")
-      
+
   if @authorization
     @authorization.grant!
   end
@@ -164,7 +164,7 @@ AUTHORIZED_COMPONENTS=[
 ]
 ```
 
-2. Logo após, será verificado se o usuário é estrangeiro (`is_non_govbr_user?`) e se ele está tentando acessar um componente que não está na lista de componentes permitidos (`component_unauthorized?`).
+2. Logo após, será verificado se o usuário é estrangeiro (`non_govbr_user?`) e se ele está tentando acessar um componente que não está na lista de componentes permitidos (`component_permitted_for_foreign_user?`).
 
 3. Um outro ponto é que as permissões de Documentos de Identidade são marcadas automaticamente assim que um componente é publicado. Dessa forma, sempre será verificado se o usuário teve o seu documento validado e caso positivo, ele poderá participar. O método update_permissions no arquivo app/commands/decidim/extra_user_fields/admin/publish_component.rb é responsável por fazer essa configuração de forma automática:
 
