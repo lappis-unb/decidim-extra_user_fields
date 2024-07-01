@@ -1,42 +1,42 @@
 <% if current_organization.extra_user_fields_enabled? %>
-  <div class="new-proposal-form">
+  <div class="new-proposal-form foreign-form">
     <div class="legend">
       <h3><%= t(".signup.legend") %></h3>
     </div>
     <% if current_organization.activated_extra_field?(:date_of_birth) %>
       <div class="br-input input-highlight bp-input">
-        <%= f.date_field :date_of_birth %>
+        <%= f.date_field :date_of_birth, placeholder: "dd/mm/aaaa" %>
       </div>
     <% end %>
     <% if current_organization.activated_extra_field?(:gender) %>
       <div class="bp-select input-highlight">
-        <%= f.collection_select :gender, f.object.gender_options_for_select, :first, :last %>
+        <%= f.collection_select :gender, f.object.gender_options_for_select, :first, :last, prompt: "Select your gender" %>
       </div>
     <% end %>
     <% if current_organization.activated_extra_field?(:country) %>
       <div class="bp-select input-highlight">
-        <%= f.custom_country_select :country %>
+        <%= f.custom_country_select :country, placeholder: "Select your country" %>
       </div>
     <% end %>
     <% if current_organization.activated_extra_field?(:postal_code) %>
       <div class="br-input input-highlight bp-input">
-        <%= f.text_field :postal_code %>
+        <%= f.text_field :postal_code , placeholder: "Postal code" %>
       </div>
     <% end %>
     <% if current_organization.activated_extra_field?(:phone_number) %>
       <div class="br-input input-highlight bp-input">
-        <%= f.text_field :phone_number %>
+        <%= f.text_field :phone_number, placeholder: "Phone number" %>
       </div>
     <% end %>
     <% if current_organization.activated_extra_field?(:location) %>
       <div class="br-input input-highlight bp-input">
-        <%= f.text_field :location %>
+        <%= f.text_field :location, placeholder: "Location" %>
       </div>
     <% end %>
     <%# Block ExtraUserFields SignUpFormFields %>
     <% if current_organization.activated_extra_field?(:document_number) %>
       <div class="br-input input-highlight bp-input">
-        <%= f.text_field :document_number %>
+        <%= f.text_field :document_number, placeholder: "Document number" %>
       </div>
     <% end %>
     <% if current_organization.activated_extra_field?(:document_image) %>
@@ -52,7 +52,14 @@
           <p><%= t("decidim.extra_user_fields.registration_form.document_valid.help_text")%></p>
           <img src="<%= asset_pack_path("media/images/selfie_id_help.jpg") %>">
         </div>
-        <%= f.file_field :document_image, multiple: false, direct_upload: false %>
+        <fieldset class="attachments_container gallery__container documents_container">
+          <legend class="foreign_label" ><%= t("decidim.extra_user_fields.registration_form.document_image.label")%></legend>
+          <div class="row column">
+            <%= f.attachment :document_image, multiple: true,
+              label: t("decidim.extra_user_fields.registration_form.document_image.label"),
+             button_label: t("decidim.extra_user_fields.registration_form.document_image.button_label") %>
+          </div>
+        </fieldset>
         <span class="form-error document-form-error" hidden>
           <%= t("decidim.extra_user_fields.registration_form.document_valid.error_text")%>
         </span>
@@ -72,9 +79,16 @@
     <% end %>
     <% if current_organization.activated_extra_field?(:document_type) %>
       <div class="bp-select input-highlight">
-        <%= f.collection_select :document_type, f.object.document_type_options_for_select, :first, :last %>
+        <%= f.collection_select :document_type, f.object.document_type_options_for_select, :first, :last, prompt: "Select your document type" %>
       </div>
     <% end %>
     <%# EndBlock %>
   </div>
+<% end %>
+<% content_for :js_content do %>
+  <script>
+    $(document).ready(function() {
+      $('#user_document_image_button').append('<i class="fas fa-cloud-arrow-up"></i>');
+    });
+  </script>
 <% end %>
