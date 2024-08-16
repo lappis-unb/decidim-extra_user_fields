@@ -38,7 +38,6 @@ module Decidim
           )
         end
 
-        # rubocop:disable Style/TrailingCommaInHashLiteral
         def extra_user_fields
           {
             "enabled" => form.enabled.presence || false,
@@ -50,10 +49,11 @@ module Decidim
             "location" => { "enabled" => form.location.presence || false },
             # Block ExtraUserFields SaveFieldInConfig
 
-            "document_image" => { "enabled" => form.document_image.presence || false },
-            "document_number" => { "enabled" => form.document_number.presence || false },
-            "document_valid" => { "enabled" => form.document_valid.presence || false },
-            "document_type" => { "enabled" => form.document_type.presence || false },
+            "selfie_image" => { "enabled" => form.selfie_image.present? },
+            "document_image" => { "enabled" => form.document_image.present? },
+            "document_number" => { "enabled" => form.document_number.present? },
+            "document_valid" => { "enabled" => form.document_valid.present? },
+            "document_type" => { "enabled" => form.document_type.present? },
 
             # EndBlock
             "permitted_components" => {
@@ -64,7 +64,6 @@ module Decidim
             }
           }
         end
-        # rubocop:enable Style/TrailingCommaInHashLiteral
       end
     end
   end

@@ -62,6 +62,10 @@ en:
               description: This field is a String field. User will be able to fill a
                 document number
               label: Enable document number field
+            selfie_image:
+              description: This field is a File field. User will be able to submit a
+                selfie photo holding their official document.
+              label: Enable selfie image field
             document_image:
               description: This field is a File field. User will be able to submit a
                 photo of an official document.
@@ -106,6 +110,10 @@ en:
           help_title: Instructions to upload your selfie
           help_text: Please upload a selfie photo side by side with your document. Your face must be clean, without glasses or masks and looking straight ahead.
           error_text: The image provided does not match the criteria. See the help instructions to provide a better photo.
+        selfie_image:
+          label: Selfie holding the Document
+          button_label: Choose a file
+          help_title: Selfie holding the Document
         document_image:
           label: Document image
           button_label: Choose a file

@@ -21,6 +21,7 @@ module Decidim
         attribute :location, String
 
         # Brasil Participativo Attributes
+        attribute :selfie_image, Decidim::Attributes::Blob
         attribute :document_image, Decidim::Attributes::Blob
         attribute :document_number, String
         attribute :document_valid, String
@@ -58,6 +59,7 @@ module Decidim
 
         # Block ExtraUserFields MapModel
 
+        self.selfie_image = extended_data[:selfie_image]
         self.document_number = extended_data[:document_number]
         self.document_image = extended_data[:document_image]
         self.document_valid = extended_data[:document_valid]
@@ -91,6 +93,10 @@ module Decidim
 
       def location?
         extra_user_fields_enabled && current_organization.activated_extra_field?(:location)
+      end
+
+      def selfie_image?
+        extra_user_fields_enabled && current_organization.activated_extra_field?(:selfie_image)
       end
 
       def document_image?
