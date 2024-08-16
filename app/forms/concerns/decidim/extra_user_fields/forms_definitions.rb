@@ -40,6 +40,7 @@ module Decidim
 
         # Brasil participativo Validations
         validates :document_number, presence: true, if: :document_number?
+        validates :selfie_image, presence: true, if: :selfie_image?
         validates :document_image, presence: true, if: :document_image?
         validates :document_valid, presence: true, if: :document_valid?
         validates :document_type, presence: true, inclusion: { in: Decidim::ExtraUserFields::Engine::DEFAULT_DOCUMENT_TYPE_OPTIONS.map(&:to_s) }, if: :document_type?

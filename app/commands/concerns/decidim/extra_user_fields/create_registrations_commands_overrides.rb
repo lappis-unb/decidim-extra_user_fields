@@ -42,6 +42,7 @@ module Decidim
         @register_form.document_number = form.document_number
         @register_form.document_type = form.document_type
         @register_form.verification_attachment = form.document_image
+        @register_form.second_verification_attachment = form.selfie_image
 
         @authorization = Decidim::Authorization.find_or_initialize_by(
           user: @user,
@@ -71,8 +72,6 @@ module Decidim
           location: form.location,
 
           # Brasil Participativo form
-          selfie_image: form.selfie_image,
-          document_image: form.document_image,
           document_number: form.document_number,
           document_valid: form.document_valid,
           document_type: form.document_type

@@ -1,6 +1,6 @@
 <% if current_organization.extra_user_fields_enabled? %>
   <div class="new-proposal-form foreign-form">
-    <div class="legend">
+    <div class="submit-foreign-form-content">
       <h3><%= t(".signup.legend") %></h3>
     </div>
     <% if current_organization.activated_extra_field?(:date_of_birth) %>
@@ -48,15 +48,18 @@
           <a class="face-validation-field_toggle-help" title="close help">
             <i class="fa fa-xmark"></i>
           </a>
-          <h6><%= t("decidim.extra_user_fields.registration_form.document_valid.help_title")%></h6>
+          <h5><%= t("decidim.extra_user_fields.registration_form.document_valid.help_title")%></h5>
           <p><%= t("decidim.extra_user_fields.registration_form.document_valid.help_text")%></p>
-          <img src="<%= asset_pack_path("media/images/selfie_id_help.jpg") %>">
+          <img src="<%= asset_pack_path("media/images/selfie_id_help.png") %>">
         </div>
         <%= f.file_field :document_image, multiple: false, direct_upload: false %>
         <span class="form-error document-form-error" hidden>
           <%= t("decidim.extra_user_fields.registration_form.document_valid.error_text")%>
         </span>
       </div>
+    <% end %>
+    <% if current_organization.activated_extra_field?(:selfie_image) %>
+      <%= f.file_field :selfie_image, multiple: false, direct_upload: false %>
     <% end %>
     <% if current_organization.activated_extra_field?(:document_valid) %>
       <%= javascript_pack_tag "extra_user_fields" %>
@@ -80,8 +83,8 @@
 <% end %>
 <% content_for :js_content do %>
   <script>
-    $(document).ready(function() {
-      $('#user_document_image_button').append('<i class="fas fa-cloud-arrow-up"></i>');
-    });
+      $(document).ready(function() {
+          $('#user_document_image_button').append('<i class="fas fa-cloud-arrow-up"></i>');
+      });
   </script>
 <% end %>

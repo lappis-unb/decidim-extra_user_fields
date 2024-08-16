@@ -19,13 +19,25 @@ module Decidim
         # resources :extra_user_fields
         # root to: "extra_user_fields#index"
       end
-      
+
       initializer "decidim_extra_user_fields.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
 
       initializer "decidim_extra_user_fields.registration_additions" do
         config.to_prepare do
+          Decidim::Verifications::PerformAuthorizationStep.class_eval do
+            prepend Decidim::ExtraUserFields::PerformAuthorizationStepOverrides
+          end
+
+          Decidim::Verifications::IdDocuments::UploadForm.class_eval do
+            include Decidim::ExtraUserFields::UploadFormOverrides
+          end
+
+          Decidim::Authorization.class_eval do
+            prepend Decidim::ExtraUserFields::AuthorizationOverrides
+          end
+
           Decidim::RegistrationForm.class_eval do
             include Decidim::ExtraUserFields::FormsDefinitions
           end
