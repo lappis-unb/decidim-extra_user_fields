@@ -33,16 +33,16 @@ module Decidim
         rescue StandardError => e
           print e
         end
-
       end
 
       def send_verification
-        @register_form = Decidim::Verifications::IdDocuments::UploadForm.new(user: @user).with_context(current_organization:form.current_organization)
+        @register_form = Decidim::Verifications::IdDocuments::UploadForm.new(user: @user).with_context(current_organization: form.current_organization)
 
         @register_form.verification_type = "online"
         @register_form.document_number = form.document_number
         @register_form.document_type = form.document_type
         @register_form.verification_attachment = form.document_image
+        @register_form.second_verification_attachment = form.selfie_image
 
         @authorization = Decidim::Authorization.find_or_initialize_by(
           user: @user,
@@ -72,7 +72,6 @@ module Decidim
           location: form.location,
 
           # Brasil Participativo form
-          document_image: form.document_image,
           document_number: form.document_number,
           document_valid: form.document_valid,
           document_type: form.document_type

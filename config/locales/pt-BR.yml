@@ -54,6 +54,9 @@ pt-BR:
             document_number:
               description: Este campo é um campo de texto. O usuário será capaz de preencher o número de seu documento escolhido.
               label: Habilitar campo "Número do documento"
+            selfie_image:
+              description: Este é um campo de upload de arquivos. O usuário será capaz de submeter uma foto selfie segurando o documento de identificação.
+              label: Habilitar campo "Selfie com documento"
             document_image:
               description: Este campo é um campo de upload de arquivos. O usuário será capaz de submeter a foto do seu documento escolhido.
               label: Habilitar campo "Foto do documento"

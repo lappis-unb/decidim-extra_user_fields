@@ -15,6 +15,7 @@ module Decidim
         attribute :location, Boolean
 
         # Block ExtraUserFields Attributes
+        attribute :selfie_image, Boolean
         attribute :document_image, Boolean
         attribute :document_number, Boolean
         attribute :document_valid, Boolean
@@ -38,6 +39,7 @@ module Decidim
           self.location = model.extra_user_fields.dig("location", "enabled")
 
           # Block ExtraUserFields MapModel
+          self.selfie_image = model.extra_user_fields.dig("selfie_image", "enabled")
           self.document_image = model.extra_user_fields.dig("document_image", "enabled")
           self.document_number = model.extra_user_fields.dig("document_number", "enabled")
           self.document_valid = model.extra_user_fields.dig("document_valid", "enabled")

@@ -21,6 +21,7 @@ module Decidim
         attribute :location, String
 
         # Brasil Participativo Attributes
+        attribute :selfie_image, Decidim::Attributes::Blob
         attribute :document_image, Decidim::Attributes::Blob
         attribute :document_number, String
         attribute :document_valid, String
@@ -39,6 +40,7 @@ module Decidim
 
         # Brasil participativo Validations
         validates :document_number, presence: true, if: :document_number?
+        validates :selfie_image, presence: true, if: :selfie_image?
         validates :document_image, presence: true, if: :document_image?
         validates :document_valid, presence: true, if: :document_valid?
         validates :document_type, presence: true, inclusion: { in: Decidim::ExtraUserFields::Engine::DEFAULT_DOCUMENT_TYPE_OPTIONS.map(&:to_s) }, if: :document_type?
@@ -58,6 +60,7 @@ module Decidim
 
         # Block ExtraUserFields MapModel
 
+        self.selfie_image = extended_data[:selfie_image]
         self.document_number = extended_data[:document_number]
         self.document_image = extended_data[:document_image]
         self.document_valid = extended_data[:document_valid]
@@ -91,6 +94,10 @@ module Decidim
 
       def location?
         extra_user_fields_enabled && current_organization.activated_extra_field?(:location)
+      end
+
+      def selfie_image?
+        extra_user_fields_enabled && current_organization.activated_extra_field?(:selfie_image)
       end
 
       def document_image?
