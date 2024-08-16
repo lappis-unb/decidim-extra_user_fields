@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-AUTHORIZED_COMPONENTS = [
+AUTHORIZED_COMPONENTS=[
   {
     "name" => "Proposals",
     "condition" => "participatory_texts_enabled"
   }, {
-    "name" => "Survey"
+    "name" => "Survey",
   }
 ]
 
@@ -26,6 +26,27 @@ module Decidim
         @component = resource.try(:component) || component
         @resource = resource
         @organization = component.organization
+      end
+
+      def non_govbr_user?
+        @authorization.user&.extended_data&.fetch("document_type", "").downcase.in?(%w[passport dni])
+      end
+
+      def component_permitted_for_foreign_user?
+        case @component.manifest_name
+        when "proposals"
+          if @component.settings["participatory_texts_enabled"]
+            organization.participatory_texts_permitted_for_foreign_users?
+          else
+            organization.proposals_permitted_for_foreign_users?
+          end
+        when "surveys"
+          organization.surveys_permitted_for_foreign_users?
+        when "meetings"
+          organization.meetings_permitted_for_foreign_users?
+        else
+          false
+        end
       end
 
       #
@@ -51,8 +72,6 @@ module Decidim
       #     extra_explanation - Hash with an additional key and params to be translated and shown to the user.
       #
       def authorize
-        return [:ok, {}] if user_is_admin?
-
         if !authorization
           [:missing, { action: :authorize }]
         elsif authorization_expired?
@@ -64,7 +83,7 @@ module Decidim
         elsif missing_fields.any?
           [:incomplete, { fields: missing_fields, action: :reauthorize, cancel: true }]
         elsif non_govbr_user? && !component_permitted_for_foreign_user?
-          # [:unauthorized, { fields: non_gov_user_error_message }]
+          #[:unauthorized, { fields: non_gov_user_error_message }]
           [:forbidden, {}]
         else
           [:ok, {}]
@@ -83,31 +102,6 @@ module Decidim
       protected
 
       attr_reader :authorization, :options, :component, :resource, :organization
-
-      def user_is_admin?
-        @authorization.user&.admin?
-      end
-
-      def non_govbr_user?
-        @authorization.user&.extended_data&.fetch("document_type", "").downcase.in?(%w(passport dni))
-      end
-
-      def component_permitted_for_foreign_user?
-        case @component.manifest_name
-        when "proposals"
-          if @component.settings["participatory_texts_enabled"]
-            organization.participatory_texts_permitted_for_foreign_users?
-          else
-            organization.proposals_permitted_for_foreign_users?
-          end
-        when "surveys"
-          organization.surveys_permitted_for_foreign_users?
-        when "meetings"
-          organization.meetings_permitted_for_foreign_users?
-        else
-          false
-        end
-      end
 
       def non_gov_user_error_message
         # error_message = { error: "This action is not permitted for non-govbr users." }
@@ -144,6 +138,6 @@ module Decidim
       def authorization_expired?
         authorization.expires_at.present? && authorization.expired?
       end
-    end
-  end
+     end
+   end
 end
