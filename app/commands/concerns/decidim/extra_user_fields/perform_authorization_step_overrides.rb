@@ -13,7 +13,7 @@ module Decidim
           metadata: handler.metadata,
           verification_metadata: handler.verification_metadata,
           verification_attachment: handler.verification_attachment,
-          second_verification_attachment: handler.second_verification_attachment
+          second_verification_attachment: handler.try(:second_verification_attachment)
         }
 
         authorization.save!
