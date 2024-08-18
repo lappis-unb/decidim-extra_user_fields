@@ -42,24 +42,44 @@
     <% if current_organization.activated_extra_field?(:selfie_image) %>
       <div class="field face-file-field">
         <a class="face-validation-field_toggle-help" title="open help">
-          <i class="fa fa-circle-question"></i>
         </a>
         <div class="face-validation-field_help" hidden>
           <a class="face-validation-field_toggle-help" title="close help">
             <i class="fa fa-xmark"></i>
           </a>
-          <h5><%= t("decidim.extra_user_fields.registration_form.document_valid.help_title")%></h5>
-          <p><%= t("decidim.extra_user_fields.registration_form.document_valid.help_text")%></p>
-          <img src="<%= asset_pack_path("media/images/selfie_id_help.png") %>">
         </div>
-        <%= f.file_field :selfie_image, multiple: false, direct_upload: false %>
-        <span class="form-error document-form-error" hidden>
-          <%= t("decidim.extra_user_fields.registration_form.document_valid.error_text")%>
-        </span>
+        <div class="faceid-container">
+          <span>
+            <div class="br-upload">
+              <%= f.label :selfie_image, "Envio de arquivos", class: "upload-label", for: "selfie-image" %>
+              <%= f.file_field :selfie_image, id: "selfie-image", class: "upload-input", multiple: false, direct_upload: false, aria: { hidden: "null", label: "enviar arquivo" } %>
+              <div class="upload-list"></div>
+            </div>
+            <p class="text-base mt-1">Click or drag files onto the Upload component.</p>
+            <span class="form-error document-form-error" hidden>
+              <%= t("decidim.extra_user_fields.registration_form.document_valid.error_text")%>
+            </span>
+          </span>
+          <i class="fa fa-circle-question fa-3x"id="toggle-button"></i>
+        </div>
+        <div class="br-message info" id="expandable-div" style="overflow: hidden; padding: 0; margin: 0; max-height: 0; transition: max-height 0.4s ease-out;">
+          <div class="content" aria-label="Informação. Seus dados só serão salvos após o preenchimento do primeiro campo do formulário." role="alert">
+            <span class="message-title"><%= t("decidim.extra_user_fields.registration_form.document_valid.help_title")%></span>
+            <span class="message-body">
+              <p class="mb-2"><%= t("decidim.extra_user_fields.registration_form.document_valid.help_text") %></p>
+              <img src="<%= asset_pack_path('media/images/selfie_id_help.png') %>">
+            </span>
+          </div>
+        </div>
       </div>
     <% end %>
     <% if current_organization.activated_extra_field?(:document_image) %>
-      <%= f.file_field :document_image, multiple: false, direct_upload: false %>
+      <div class="br-upload">
+        <%= f.label :document_image, "Envio de documentos", class: "upload-label", for: "document-image" %>
+        <%= f.file_field :document_image, id: "document-image", class: "upload-input", multiple: false, direct_upload: false, aria: { hidden: "null", label: "enviar documento" } %>
+        <div class="upload-list"></div>
+      </div>
+      <p class="text-base mt-1">Click or drag files onto the Upload component.</p>
     <% end %>
     <% if current_organization.activated_extra_field?(:document_valid) %>
       <%= javascript_pack_tag "extra_user_fields" %>
@@ -83,8 +103,43 @@
 <% end %>
 <% content_for :js_content do %>
   <script>
-      $(document).ready(function() {
-          $('#user_document_image_button').append('<i class="fas fa-cloud-arrow-up"></i>');
+    $(document).ready(function() {
+      $('#user_document_image_button').append('<i class="fas fa-cloud-arrow-up"></i>');
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById('toggle-button').addEventListener('click', function() {
+        var expandableDiv = document.getElementById('expandable-div');
+
+        if (expandableDiv.style.maxHeight === '0px' || expandableDiv.style.maxHeight === '') {
+          expandableDiv.style.maxHeight = '450px';
+          expandableDiv.style.padding = '20px';
+        } else {
+          expandableDiv.style.maxHeight = '0px';
+          expandableDiv.style.padding = '0px';
+        }
       });
+    });
   </script>
 <% end %>
+<style>
+.faceid-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  span {
+    flex: 1;
+  }
+
+  #toggle-button {
+    margin-top: 40px;
+    color: var(--blue-warm-vivid-70);
+    cursor: pointer;
+  }
+  #toggle-button:hover {
+    color: var(--blue-warm-vivid-60);
+    cursor: pointer;
+  }
+}
+</style>
