@@ -98,7 +98,8 @@ en:
             success: Extra user fields correctly updated in organization
       document_types:
         passport: Passaporte
-        DNI: DNI
+        DNI: DNI - (only for Mercosul)
+        RNE: RNE
       genders:
         female: Female
         male: Male

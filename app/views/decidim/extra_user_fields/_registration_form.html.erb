@@ -51,8 +51,7 @@
         <div class="faceid-container">
           <span>
             <div class="br-upload">
-              <%= f.label :selfie_image, "Envio de arquivos", class: "upload-label", for: "selfie-image" %>
-              <%= f.file_field :selfie_image, id: "selfie-image", class: "upload-input", multiple: false, direct_upload: false, aria: { hidden: "null", label: "enviar arquivo" } %>
+              <%= f.file_field :selfie_image, id: "selfie-image", class: "upload-input", multiple: false, direct_upload: false, aria: { hidden: "null", label: "" } %>
               <div class="upload-list"></div>
             </div>
             <p class="text-base mt-1">Click or drag files onto the Upload component.</p>
@@ -77,8 +76,7 @@
     <% if current_organization.activated_extra_field?(:document_image) %>
       <span>
         <div class="br-upload">
-          <%= f.label :document_image, "Envio de documentos", class: "upload-label", for: "document-image" %>
-          <%= f.file_field :document_image, id: "document-image", class: "upload-input", multiple: false, direct_upload: false, aria: { hidden: "null", label: "enviar documento" } %>
+          <%= f.file_field :document_image, id: "document-image", class: "upload-input", multiple: false, direct_upload: false, aria: { hidden: "null", label: "" } %>
           <div class="upload-list"></div>
         </div>
         <p class="text-base mt-1">Click or drag files onto the Upload component.</p>
@@ -112,16 +110,21 @@
     });
 
     document.addEventListener("DOMContentLoaded", function() {
+      const uploadButton = document.querySelector('.upload-button span');
+      uploadButtons.forEach(function(button) {
+        if (button && button.textContent.trim() === "Selecione o arquivo") {
+          button.textContent = "Select the file";
+        }
+      });
       const dateInput = document.getElementById('registration_user_date_of_birth');
 
       if (dateInput) {
         dateInput.addEventListener('input', function(e) {
-          let value = dateInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+          let value = dateInput.value.replace(/\D/g, '');
           if (value.length > 8) {
-            value = value.slice(0, 8); // Limita a data a 8 dígitos (ddMMyyyy)
+            value = value.slice(0, 8);
           }
 
-          // Aplica a máscara conforme o usuário digita
           if (value.length > 4) {
             value = value.replace(/(\d{2})(\d{2})(\d+)/, '$1/$2/$3');
           } else if (value.length > 2) {
