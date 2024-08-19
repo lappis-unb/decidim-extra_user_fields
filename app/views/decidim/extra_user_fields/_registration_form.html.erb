@@ -56,6 +56,7 @@
               <div class="upload-list"></div>
             </div>
             <p class="text-base mt-1">Click or drag files onto the Upload component.</p>
+            <p class="text-base mt-1">Please take a clear photo with a white background, make sure your face and identification document are fully visible. Avoid wearing glasses, use good lighting, and ensure the photo is high quality.</p>
             <span class="form-error document-form-error" hidden>
               <%= t("decidim.extra_user_fields.registration_form.document_valid.error_text")%>
             </span>
@@ -74,12 +75,15 @@
       </div>
     <% end %>
     <% if current_organization.activated_extra_field?(:document_image) %>
-      <div class="br-upload">
-        <%= f.label :document_image, "Envio de documentos", class: "upload-label", for: "document-image" %>
-        <%= f.file_field :document_image, id: "document-image", class: "upload-input", multiple: false, direct_upload: false, aria: { hidden: "null", label: "enviar documento" } %>
-        <div class="upload-list"></div>
-      </div>
-      <p class="text-base mt-1">Click or drag files onto the Upload component.</p>
+      <span>
+        <div class="br-upload">
+          <%= f.label :document_image, "Envio de documentos", class: "upload-label", for: "document-image" %>
+          <%= f.file_field :document_image, id: "document-image", class: "upload-input", multiple: false, direct_upload: false, aria: { hidden: "null", label: "enviar documento" } %>
+          <div class="upload-list"></div>
+        </div>
+        <p class="text-base mt-1">Click or drag files onto the Upload component.</p>
+        <p class="text-base mt-1">Please upload a clear photo of your Passaport, DNI or RNE. Make sure all details are easy to read and the image isn't blurry or covered.</p>
+      </span>
     <% end %>
     <% if current_organization.activated_extra_field?(:document_valid) %>
       <%= javascript_pack_tag "extra_user_fields" %>
@@ -108,6 +112,25 @@
     });
 
     document.addEventListener("DOMContentLoaded", function() {
+      const dateInput = document.getElementById('registration_user_date_of_birth');
+
+      if (dateInput) {
+        dateInput.addEventListener('input', function(e) {
+          let value = dateInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+          if (value.length > 8) {
+            value = value.slice(0, 8); // Limita a data a 8 dígitos (ddMMyyyy)
+          }
+
+          // Aplica a máscara conforme o usuário digita
+          if (value.length > 4) {
+            value = value.replace(/(\d{2})(\d{2})(\d+)/, '$1/$2/$3');
+          } else if (value.length > 2) {
+            value = value.replace(/(\d{2})(\d+)/, '$1/$2');
+          }
+
+          dateInput.value = value;
+        });
+      }
       document.getElementById('toggle-button').addEventListener('click', function() {
         var expandableDiv = document.getElementById('expandable-div');
 
