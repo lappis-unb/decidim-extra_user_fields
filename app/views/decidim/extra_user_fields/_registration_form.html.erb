@@ -15,7 +15,16 @@
     <% end %>
     <% if current_organization.activated_extra_field?(:country) %>
       <div class="bp-select input-highlight">
-        <%= f.custom_country_select :country, placeholder: "Select your country" %>
+        <%= f.custom_country_select :country, placeholder: "Select your country", id: "registration_user_country" %>
+        <div class="br-message info" id="br-warning" style="overflow: hidden; padding: 0px; margin: 0; max-height: 0px; transition: max-height 0.4s ease-out;">
+          <div class="content" aria-label="Information. Your data will only be saved after filling in the first field of the form." role="alert">
+            <span class="message-title">Cadastros de usuários brasileiros</span>
+            <span class="message-body">
+              <p class="mb-2">O cadastro de usuários brasileiros é feito por meio do GovBr. Você pode encontrá-lo aqui:</p>
+              <%= render "decidim/devise/shared/omniauth_buttons" %>
+            </span>
+          </div>
+        </div>
       </div>
     <% end %>
     <% if current_organization.activated_extra_field?(:postal_code) %>
@@ -62,7 +71,7 @@
           </span>
           <i class="fa fa-circle-question fa-3x"id="toggle-button"></i>
         </div>
-        <div class="br-message info" id="expandable-div" style="overflow: hidden; padding: 0; margin: 0; max-height: 0; transition: max-height 0.4s ease-out;">
+        <div class="br-message info" id="expandable-div" style="overflow: hidden; padding: 20px; margin: 0; max-height: 450px; transition: max-height 0.4s ease-out;">
           <div class="content" aria-label="Informação. Seus dados só serão salvos após o preenchimento do primeiro campo do formulário." role="alert">
             <span class="message-title"><%= t("decidim.extra_user_fields.registration_form.document_valid.help_title")%></span>
             <span class="message-body">
@@ -145,6 +154,26 @@
           expandableDiv.style.padding = '0px';
         }
       });
+
+      const countryInput = document.getElementById('registration_user_country');
+      const expandableDiv = document.getElementById('br-warning');
+
+      if (countryInput && expandableDiv) {
+        countryInput.addEventListener('change', function() {
+          let value = countryInput.value;
+
+          if (value === "BR") {
+            expandableDiv.style.maxHeight = '450px';
+            expandableDiv.style.padding = '20px';
+            expandableDiv.style.marginTop = '8px';
+          } else {
+            expandableDiv.style.maxHeight = '0px';
+            expandableDiv.style.padding = '0px';
+            expandableDiv.style.marginTop = '0px';
+          }
+        });
+      }
+
     });
   </script>
 <% end %>
