@@ -54,9 +54,9 @@ module Decidim
             prepend Decidim::ExtraUserFields::CreateRegistrationsCommandsOverrides
           end
 
-          Decidim::CreateOmniauthRegistration.class_eval do
-            prepend Decidim::ExtraUserFields::OmniauthCommandsOverrides
-          end
+          # Decidim::CreateOmniauthRegistration.class_eval do
+          #   prepend Decidim::ExtraUserFields::OmniauthCommandsOverrides
+          # end
 
           Decidim::UpdateAccount.class_eval do
             prepend Decidim::ExtraUserFields::UpdateAccountCommandsOverrides
