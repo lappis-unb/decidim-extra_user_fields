@@ -20,7 +20,7 @@
           <div class="content" aria-label="Information. Your data will only be saved after filling in the first field of the form." role="alert">
             <span class="message-title">Cadastros de usuários brasileiros</span>
             <span class="message-body">
-              <p class="mb-2">O cadastro de usuários brasileiros é feito por meio do GovBr. Você pode encontrá-lo aqui:</p>
+              <p class="mb-2">É feito por meio do gov.br, para fazê-lo clique aqui:</p>
               <%= render "decidim/devise/shared/omniauth_buttons" %>
             </span>
           </div>
@@ -158,6 +158,9 @@
       const countryInput = document.getElementById('registration_user_country');
       const expandableDiv = document.getElementById('br-warning');
 
+      const submitButton = Array.from(document.querySelectorAll('.br-button.block.primary'))
+    .filter(button => button.textContent.trim() === 'Sign up');
+
       if (countryInput && expandableDiv) {
         countryInput.addEventListener('change', function() {
           let value = countryInput.value;
@@ -166,10 +169,19 @@
             expandableDiv.style.maxHeight = '450px';
             expandableDiv.style.padding = '20px';
             expandableDiv.style.marginTop = '8px';
+
+            if (submitButton.length > 0) {
+              submitButton[0].disabled = true;
+            }
+
           } else {
             expandableDiv.style.maxHeight = '0px';
             expandableDiv.style.padding = '0px';
             expandableDiv.style.marginTop = '0px';
+
+            if (submitButton.length > 0) {
+              submitButton[0].disabled = false;
+            }
           }
         });
       }
