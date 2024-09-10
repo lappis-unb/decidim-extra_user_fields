@@ -42,25 +42,37 @@ module Decidim
             include Decidim::ExtraUserFields::FormsDefinitions
           end
 
-          Decidim::OmniauthRegistrationForm.class_eval do
-            include Decidim::ExtraUserFields::FormsDefinitions
-          end
+          # This is commented because it is not intended to have the extra user
+          # information in omniauth sign in/up strategy
+          #
+          # Decidim::OmniauthRegistrationForm.class_eval do
+          #   include Decidim::ExtraUserFields::FormsDefinitions
+          # end
 
-          Decidim::AccountForm.class_eval do
-            include Decidim::ExtraUserFields::FormsDefinitions
-          end
+          # This is commented because extra fields are not meant to be displayed
+          # in user profile page, or manipulated after sign up
+          #
+          # Decidim::AccountForm.class_eval do
+          #   include Decidim::ExtraUserFields::FormsDefinitions
+          # end
 
           Decidim::CreateRegistration.class_eval do
             prepend Decidim::ExtraUserFields::CreateRegistrationsCommandsOverrides
           end
 
+          # This is commented because it is not intended to have the extra user
+          # information in omniauth sign in/up strategy
+          #
           # Decidim::CreateOmniauthRegistration.class_eval do
           #   prepend Decidim::ExtraUserFields::OmniauthCommandsOverrides
           # end
 
-          Decidim::UpdateAccount.class_eval do
-            prepend Decidim::ExtraUserFields::UpdateAccountCommandsOverrides
-          end
+          # This is commented because extra fields are not meant to be displayed
+          # in user profile page, or manipulated after sign up
+          #
+          # Decidim::UpdateAccount.class_eval do
+          #   prepend Decidim::ExtraUserFields::UpdateAccountCommandsOverrides
+          # end
 
           Decidim::Organization.class_eval do
             prepend Decidim::ExtraUserFields::OrganizationOverrides
