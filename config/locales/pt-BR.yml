@@ -9,6 +9,14 @@ pt-BR:
         phone_number: Número de telefone
         postal_code: CEP
   decidim:
+    verifications:
+      id_documents:
+        admin:
+          pending_authorizations:
+            index:
+              sla_status:
+                on_time: Falta(m) %{time_left} para dar feedback ao usuário
+                late: Tempo de feedback expirou
     authorization_modals:
       content:
         forbidden:

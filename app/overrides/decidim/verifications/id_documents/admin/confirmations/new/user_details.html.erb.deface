@@ -1,0 +1,26 @@
+<!-- insert_before ".card" -->
+
+<% user = @pending_authorization.try(:user) %>
+
+<% if user %>
+  <div class="card">
+    <div class="card-divider">
+      <h2 class="card-title">Usuário</h2>
+    </div>
+
+    <div class="card-section">
+      <div class="row column">
+        <strong>Nome:</strong>
+        <%= user.name %>
+      </div>
+      <div class="row column">
+        <strong>E-mail:</strong>
+        <%= user.email %>
+      </div>
+      <div class="row column">
+        <strong>Data de criação:</strong>
+        <%= l(user.created_at).titleize %>
+      </div>
+    </div>
+  </div>
+<% end %>

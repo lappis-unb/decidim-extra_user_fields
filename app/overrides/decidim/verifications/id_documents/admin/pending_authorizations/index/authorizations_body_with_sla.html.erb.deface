@@ -1,0 +1,9 @@
+<!-- insert_after "table.table-list > tbody > tr > td:first-child" -->
+
+<td>
+  <% if authorization.sla_deadline.future? %>
+    <%= t(".sla_status.on_time", time_left: distance_of_time_in_words(authorization.sla_deadline, Time.current)) %>
+  <% else %>
+    <%= t(".sla_status.late") %>
+  <% end %>
+</td>

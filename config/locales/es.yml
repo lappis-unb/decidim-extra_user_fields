@@ -10,6 +10,14 @@ es:
         phone_number: Teléfono
         postal_code: Código postal
   decidim:
+    verifications:
+      id_documents:
+        admin:
+          pending_authorizations:
+            index:
+              sla_status:
+                on_time: "Queda(n) %{time_left} para dar feedback al usuario"
+                late: El período de feedback ha terminado
     components:
       extra_user_fields:
         name: ExtraUserFields

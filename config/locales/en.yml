@@ -10,6 +10,14 @@ en:
         phone_number: Phone Number
         postal_code: Postal code
   decidim:
+    verifications:
+      id_documents:
+        admin:
+          pending_authorizations:
+            index:
+              sla_status:
+                on_time: "%{time_left} remaining to feedback to the user"
+                late: The feedback period is over
     authorization_modals:
       content:
         forbidden:

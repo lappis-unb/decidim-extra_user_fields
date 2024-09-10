@@ -1,0 +1,3 @@
+<!-- insert_after "table.table-list > thead > tr > th:first-child" -->
+
+<th>SLA de verificação</th>
