@@ -19,7 +19,7 @@
       </div>
       <div class="row column">
         <strong>Data de criação:</strong>
-        <%= l(user.created_at).titleize %>
+        <%= l(user.created_at, format: :short) %>
       </div>
     </div>
   </div>
