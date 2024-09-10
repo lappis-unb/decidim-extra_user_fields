@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-AUTHORIZED_COMPONENTS=[
+AUTHORIZED_COMPONENTS = [
   {
     "name" => "Proposals",
     "condition" => "participatory_texts_enabled"
   }, {
-    "name" => "Survey",
+    "name" => "Survey"
   }
 ]
 
@@ -29,7 +29,7 @@ module Decidim
       end
 
       def non_govbr_user?
-        @authorization.user&.extended_data&.fetch("document_type", "").downcase.in?(%w[passport dni])
+        @authorization.user&.extended_data&.fetch("document_type", "").downcase.in?(%w(passport dni))
       end
 
       def component_permitted_for_foreign_user?
@@ -83,7 +83,7 @@ module Decidim
         elsif missing_fields.any?
           [:incomplete, { fields: missing_fields, action: :reauthorize, cancel: true }]
         elsif non_govbr_user? && !component_permitted_for_foreign_user?
-          #[:unauthorized, { fields: non_gov_user_error_message }]
+          # [:unauthorized, { fields: non_gov_user_error_message }]
           [:forbidden, {}]
         else
           [:ok, {}]
@@ -138,6 +138,6 @@ module Decidim
       def authorization_expired?
         authorization.expires_at.present? && authorization.expired?
       end
-     end
-   end
+    end
+  end
 end
