@@ -1,23 +1,23 @@
-<% if current_organization.activated_extra_field?(:date_of_birth) %>
+<% if current_organization.activated_extra_field?(:date_of_birth) && f.object.respond_to?(:date_of_birth) %>
   <%= f.date_field :date_of_birth %>
 <% end %>
 
-<% if current_organization.activated_extra_field?(:gender) %>
+<% if current_organization.activated_extra_field?(:gender) && f.object.respond_to?(:gender) %>
   <%= f.collection_select :gender, f.object.gender_options_for_select, :first, :last %>
 <% end %>
 
-<% if current_organization.activated_extra_field?(:country) %>
+<% if current_organization.activated_extra_field?(:country) && f.object.respond_to?(:country) %>
   <%= f.custom_country_select :country %>
 <% end %>
 
-<% if current_organization.activated_extra_field?(:postal_code) %>
+<% if current_organization.activated_extra_field?(:postal_code) && f.object.respond_to?(:postal_code) %>
   <%= f.text_field :postal_code %>
 <% end %>
 
-<% if current_organization.activated_extra_field?(:phone_number) %>
+<% if current_organization.activated_extra_field?(:phone_number) && f.object.respond_to?(:phone_number) %>
   <%= f.text_field :phone_number %>
 <% end %>
 
-<% if current_organization.activated_extra_field?(:location) %>
+<% if current_organization.activated_extra_field?(:location) && f.object.respond_to?(:location) %>
   <%= f.text_field :location %>
 <% end %>
