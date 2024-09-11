@@ -25,7 +25,7 @@ module Decidim
 
       %w(proposals participatory_texts surveys meetings).each do |component|
         define_method "#{component}_permitted_for_foreign_users?" do
-          self.extra_user_fields["permitted_components"].try(:[], component) || false
+          extra_user_fields["permitted_components"].try(:[], component) || false
         end
       end
     end

@@ -1,0 +1,7 @@
+<!-- insert_after "div.card-section > div.row.column:first-child" -->
+
+<% if @pending_authorization.try(:second_verification_attachment).present? %>
+  <div class="row column">
+    <%= image_tag @pending_authorization.attached_uploader(:second_verification_attachment).variant_path(:big), class: "thumbnail" %>
+  </div>
+<% end %>

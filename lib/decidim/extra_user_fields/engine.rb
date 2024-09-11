@@ -85,6 +85,14 @@ module Decidim
           Decidim::Verifications::DefaultActionAuthorizer.class_eval do
             prepend Decidim::ExtraUserFields::GovBrActionAuthorizer
           end
+
+          Decidim::Verifications::IdDocuments::Admin::PendingAuthorizationsController.class_eval do
+            prepend Decidim::ExtraUserFields::PendingAuthorizationsControllerOverrides
+          end
+
+          Decidim::Verifications::IdDocuments::AuthorizationPresenter.class_eval do
+            include Decidim::Verifications::IdDocuments::AuthorizationPresenterOverrides
+          end
         end
       end
     end
