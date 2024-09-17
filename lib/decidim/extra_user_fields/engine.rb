@@ -97,6 +97,14 @@ module Decidim
           Decidim::Verifications::IdDocuments::AuthorizationsController.class_eval do
             prepend Decidim::ExtraUserFields::AuthorizationControllerOverrides
           end
+
+          Decidim::User.class_eval do
+            include Decidim::ExtraUserFields::UserOverrides
+          end
+
+          Decidim::ActionAuthorizer::AuthorizationStatusCollection.class_eval do
+            prepend Decidim::ExtraUserFields::AuthorizationStatusCollectionOverrides
+          end
         end
       end
     end
