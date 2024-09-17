@@ -53,15 +53,7 @@ module Decidim
             "document_image" => { "enabled" => form.document_image.present? },
             "document_number" => { "enabled" => form.document_number.present? },
             "document_valid" => { "enabled" => form.document_valid.present? },
-            "document_type" => { "enabled" => form.document_type.present? },
-
-            # EndBlock
-            "permitted_components" => {
-              "proposals" => form.proposals_permitted?,
-              "participatory_texts" => form.participatory_texts_permitted?,
-              "surveys" => form.surveys_permitted?,
-              "meetings" => form.meetings_permitted?
-            }
+            "document_type" => { "enabled" => form.document_type.present? }
           }
         end
       end

@@ -23,6 +23,10 @@ es:
     components:
       extra_user_fields:
         name: ExtraUserFields
+      proposals:
+        settings:
+          global:
+            enabled_for_foreign_users: Los usuarios extranjeros pueden participar
     extra_user_fields:
       admin:
         exports:

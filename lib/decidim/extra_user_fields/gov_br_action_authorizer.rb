@@ -3,29 +3,8 @@
 module Decidim
   module ExtraUserFields
     module GovBrActionAuthorizer
-      def initialize(authorization, options, component, resource)
-        @authorization = authorization
-        @options = options.deep_dup || {} # options hash is cloned to allow changes applied to it without risks
-        @component = resource.try(:component) || component
-        @resource = resource
-        @organization = component.organization
-      end
-
       def component_permitted_for_foreign_user?
-        case @component.manifest_name
-        when "proposals"
-          if @component.settings["participatory_texts_enabled"]
-            organization.participatory_texts_permitted_for_foreign_users?
-          else
-            organization.proposals_permitted_for_foreign_users?
-          end
-        when "surveys"
-          organization.surveys_permitted_for_foreign_users?
-        when "meetings"
-          organization.meetings_permitted_for_foreign_users?
-        else
-          false
-        end
+        @component.settings.try(:enabled_for_foreign_users)
       end
 
       def authorize
@@ -45,10 +24,6 @@ module Decidim
           [:ok, {}]
         end
       end
-
-      protected
-
-      attr_reader :organization
     end
   end
 end

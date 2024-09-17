@@ -24,6 +24,20 @@ module Decidim
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
 
+      initializer "decidim_extra_user_fields.components_permission" do
+        Decidim.component_registry.find(:proposals).settings(:global) do |settings|
+          settings.attribute :enabled_for_foreign_users, type: :boolean, default: false
+        end
+
+        Decidim.component_registry.find(:meetings).settings(:global) do |settings|
+          settings.attribute :enabled_for_foreign_users, type: :boolean, default: false
+        end
+
+        Decidim.component_registry.find(:surveys).settings(:global) do |settings|
+          settings.attribute :enabled_for_foreign_users, type: :boolean, default: false
+        end
+      end
+
       initializer "decidim_extra_user_fields.registration_additions" do
         config.to_prepare do
           Decidim::Verifications::PerformAuthorizationStep.class_eval do
