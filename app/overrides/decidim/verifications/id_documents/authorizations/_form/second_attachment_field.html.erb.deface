@@ -1,0 +1,7 @@
+<!-- insert_bottom "div.card-section" -->
+
+<% if using_online? %>
+  <div class="field">
+    <%= form.upload :second_verification_attachment, required: true %>
+  </div>
+<% end %>
