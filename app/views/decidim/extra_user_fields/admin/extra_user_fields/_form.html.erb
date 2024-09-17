@@ -32,28 +32,3 @@
     <%# EndBlock %>
   </div>
 </div>
-
-<div class="card">
-  <div class="card-section">
-    <div>
-      <h3>Componentes Permitidos</h3>
-      <p>Habilite quais componentes usuários estrangeiros terão permissão para interagir na plataforma.</p>
-    </div>
-
-    <div class="row column">
-      <%= form.check_box :proposals_permitted, label: "Permitir Propostas" %>
-    </div>
-
-    <div class="row column">
-      <%= form.check_box :participatory_texts_permitted, label: "Permitir Textos Participativos" %>
-    </div>
-
-    <div class="row column">
-      <%= form.check_box :surveys_permitted, label: "Permitir Questionários" %>
-    </div>
-
-    <div class="row column">
-      <%= form.check_box :meetings_permitted, label: "Pemitir Reuniões" %>
-    </div>
-  </div>
-</div>
