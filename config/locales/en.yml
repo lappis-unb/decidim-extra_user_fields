@@ -9,6 +9,8 @@ en:
         location: Location
         phone_number: Phone Number
         postal_code: Postal code
+      id_document_upload:
+        second_verification_attachment: Selfie photo holding the document
   decidim:
     verifications:
       id_documents:

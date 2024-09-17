@@ -8,6 +8,8 @@ pt-BR:
         location: Endereço
         phone_number: Número de telefone
         postal_code: CEP
+      id_document_upload:
+        second_verification_attachment: Foto de selfie segurando seu documento
   decidim:
     verifications:
       id_documents:
