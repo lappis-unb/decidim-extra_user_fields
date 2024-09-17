@@ -9,6 +9,10 @@ module Decidim
 
       included do
         attribute :second_verification_attachment
+
+        validates :second_verification_attachment,
+                  presence: true,
+                  if: :uses_online_method?
       end
     end
   end
