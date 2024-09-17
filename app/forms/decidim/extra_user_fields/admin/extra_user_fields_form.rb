@@ -22,13 +22,6 @@ module Decidim
         attribute :document_type, Boolean
         # EndBlock
 
-        # Permitted components
-        attribute :proposals_permitted, Boolean
-        attribute :participatory_texts_permitted, Boolean
-        attribute :surveys_permitted, Boolean
-        attribute :meetings_permitted, Boolean
-        # End Permitted components
-
         def map_model(model)
           self.enabled = model.extra_user_fields["enabled"]
           self.country = model.extra_user_fields.dig("country", "enabled")
@@ -45,13 +38,6 @@ module Decidim
           self.document_valid = model.extra_user_fields.dig("document_valid", "enabled")
           self.document_type = model.extra_user_fields.dig("document_type", "enabled")
           # EndBlock
-
-          # Permitted components
-          self.proposals_permitted = model.proposals_permitted_for_foreign_users?
-          self.participatory_texts_permitted = model.participatory_texts_permitted_for_foreign_users?
-          self.surveys_permitted = model.surveys_permitted_for_foreign_users?
-          self.meetings_permitted = model.meetings_permitted_for_foreign_users?
-          # End Permitted components
         end
       end
     end
