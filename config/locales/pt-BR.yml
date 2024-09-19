@@ -21,11 +21,11 @@ pt-BR:
                 late: Tempo de feedback expirou
     authorization_modals:
       content:
+        missing:
+          title: Autorização necessária
         forbidden:
-          explanation:
-            Apenas usuários com conta vínculada ao gov.br podem realizar esta ação. Only users with account linked with gov.br can perform this action.
-          ok:
-            Ok
+          explanation: Esta ação está disponível apenas para usuários com conta vinculada ao gov.br. Se você é estrangeiro, não poderá realizar esta ação.
+          ok: Ok
     admin:
       actions:
         export: Exportar
