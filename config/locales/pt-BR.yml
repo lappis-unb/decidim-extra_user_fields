@@ -22,10 +22,8 @@ pt-BR:
     authorization_modals:
       content:
         forbidden:
-          explanation:
-            Apenas usuários com conta vínculada ao gov.br podem realizar esta ação. Only users with account linked with gov.br can perform this action.
-          ok:
-            Ok
+          explanation: This action is available only to users with an account linked to gov.br. If you are a foreign user, you cannot perform this action.
+          ok: Ok
     admin:
       actions:
         export: Exportar
