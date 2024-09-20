@@ -119,6 +119,13 @@
     });
 
     document.addEventListener("DOMContentLoaded", function() {
+      const document_number_form = document.getElementById('registration_user_document_number')
+      if (document_number_form) {
+        document_number_form.addEventListener('input', function(e) {
+          this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+        });
+      }
+
       const uploadButtons = document.querySelectorAll('.upload-button span');
       uploadButtons.forEach(function(button) {
         if (button && button.textContent.trim() === "Selecione o arquivo") {
