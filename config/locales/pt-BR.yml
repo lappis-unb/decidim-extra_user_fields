@@ -141,6 +141,7 @@ pt-BR:
             offline: Use offline verification
             online: Use online verification
             rejection_clarity: Make sure the information is clearly visible in the uploaded image
+            feedback_time: We aim to approve all verifications as fast as possible. However, please note that it can take up to 72 hours.
             rejection_correctness: Make sure the information entered is correct
             rejection_notice: There was a problem with your verification. Please try again
             send: Request verification again
