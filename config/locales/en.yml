@@ -67,6 +67,14 @@ en:
         settings:
           global:
             enabled_for_foreign_users: Foreign users can participate
+      meetings:
+        settings:
+          global:
+            enabled_for_foreign_users: Foreign users can participate
+      surveys:
+        settings:
+          global:
+            enabled_for_foreign_users: Foreign users can participate
     extra_user_fields:
       admin:
         exports:

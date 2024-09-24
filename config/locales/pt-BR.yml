@@ -176,6 +176,14 @@ pt-BR:
         settings:
           global:
             enabled_for_foreign_users: Usuários estrangeiros podem participar
+      meetings:
+        settings:
+          global:
+            enabled_for_foreign_users: Usuários estrangeiros podem participar
+      surveys:
+        settings:
+          global:
+            enabled_for_foreign_users: Usuários estrangeiros podem participar
     extra_user_fields:
       admin:
         exports:

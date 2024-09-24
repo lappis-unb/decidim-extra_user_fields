@@ -119,6 +119,10 @@ module Decidim
           Decidim::ActionAuthorizer::AuthorizationStatusCollection.class_eval do
             prepend Decidim::ExtraUserFields::AuthorizationStatusCollectionOverrides
           end
+
+          Decidim::Meetings::Permissions.class_eval do
+            prepend Decidim::ExtraUserFields::ComponentPermissionsOverrides
+          end
         end
       end
     end
