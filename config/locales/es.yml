@@ -27,6 +27,14 @@ es:
         settings:
           global:
             enabled_for_foreign_users: Los usuarios extranjeros pueden participar
+      meetings:
+        settings:
+          global:
+            enabled_for_foreign_users: Los usuarios extranjeros pueden participar
+      surveys:
+        settings:
+          global:
+            enabled_for_foreign_users: Los usuarios extranjeros pueden participar
     extra_user_fields:
       admin:
         exports:
