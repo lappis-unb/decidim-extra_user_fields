@@ -6,6 +6,10 @@ module Decidim
       def govbr?
         identities.any? { |identity| identity.provider.to_s.strip == "govbr" }
       end
+
+      def verification_approved?
+        Decidim::Authorization.where(user: self).where.not(granted_at: nil).present?
+      end
     end
   end
 end

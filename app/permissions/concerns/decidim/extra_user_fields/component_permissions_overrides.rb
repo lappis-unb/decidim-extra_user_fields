@@ -14,13 +14,12 @@ module Decidim
 
       def permissions
         return super unless user && component_settings && space && space.organization.extra_user_fields_enabled?
+        return super unless permission_action.scope == :public
+        return super if user.govbr? || !permission_action.action.in?([:create, :update, :cancel, :destroy, :close, :register])
 
-        if !user.govbr? && !component_settings.try(:enabled_for_foreign_users) && permission_action.action.in?([:create, :update, :cancel, :destroy, :close, :register])
-          disallow!
-          return permission_action
-        end
+        toggle_allow(component_settings.try(:enabled_for_foreign_users) && user.verification_approved?)
 
-        super
+        permission_action
       end
     end
   end
