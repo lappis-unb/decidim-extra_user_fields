@@ -16,7 +16,8 @@ module Decidim
         # We prevent @statuses to be filled with the authorization handlers if
         # user is govbr. If @status is empty, user will always be authorized.
         #
-        return if user.govbr?
+        #
+        return if user.try(:govbr?)
 
         @statuses = authorization_handlers&.map do |name, opts|
           handler = Decidim::Verifications::Adapter.from_element(name)
